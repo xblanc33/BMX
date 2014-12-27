@@ -7,13 +7,9 @@ body {
 	height: 120px;
 }*/
 
-.top {
-	padding-top: 60px;
-}
-
-.top-buffer { 
+/*.top-buffer { 
 	margin-top:10px; 
-}
+}*/
 
 #navbar {
 	font-size: 30px;
