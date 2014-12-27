@@ -1,6 +1,6 @@
  <!-- Fixed navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <!--<div class="container">-->
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -19,20 +19,34 @@
       </ul>
     </div>
 
-  <!--</div>-->
+  </div>
+</nav>
+
+<nav class="sidebar top" id="affix-nav" >
+	<ul class="nav sidenav affix" data-spy="affix">
+		<li>
+			<a href="#entrainements" ng-click="$event.preventDefault() ; scrollInto('entrainements')">Entrainements</a>
+		</li>
+		<li>
+			<a href="#prestations" ng-click="$event.preventDefault() ; scrollInto('prestations')">Prestations</a>
+		</li>
+		<li>
+			<a href="#stages" ng-click="$event.preventDefault() ; scrollInto('stages')">Stages</a>
+		</li>
+	</ul>
 </nav>
 
 
-<div class="container">
-	<div class="row" waypoint>
-		<div id="scroller" class="col-md-10 affixscrolled">
-			<div class="jumbotron">
-			  <h1>BMX Entrainement à Canéjan</h1>
-			  <p>Bla bla bla</p>
-			</div>
+<div class="container main-content">
+	<div class="row">
+		
+		<div class="jumbotron">
+		  	<h1>BMX Entrainement à Canéjan</h1>
+			<p>Bla bla bla</p>
+		</div>
 
-			<div id="horraires" class="panel panel-default scrolled-section">
-				<div class="panel-heading">Horraires / Groupes</div>
+		<div id="entrainements" class="panel panel-default">
+				<div class="panel-heading">Entrainements</div>
 				<div class="panel-body">
 					<strong>Groupe 1 (débutant)</strong><br>
 					<table class="table table-hover">
@@ -139,8 +153,24 @@
 					</table>
 				</div>
 			</div>
-		</div>
-	</div>
-	
 
+		<div id="prestations" class="panel panel-default">
+			<div class="panel-heading">Prestations</div>
+			<div class="panel-body">
+			</div>
+		</div>
+
+		<div id="stages" class="panel panel-default">
+			<div class="panel-heading">Stages</div>
+			<div class="panel-body">
+			</div>
+		</div>
+		
+	</div>
 </div>
+
+<div class="twitter">
+	<a class="twitter-timeline" href="https://twitter.com/nuitinfo" width="238" height="500" data-widget-id="544877006270513152">Tweets de @nuitinfo</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+
