@@ -2,21 +2,9 @@ body {
 	background-color: #03080B;
 }
 
-/*.navbar {
-	background: #000000 url("../img/logo-small.jpg") no-repeat right top;
-	height: 120px;
-}*/
-
-/*.top-buffer { 
-	margin-top:10px; 
-}*/
 
 #navbar {
 	font-size: 30px;
-}
-
-.panel-heading {
-	font-size: 2em;
 }
 
 
@@ -44,22 +32,6 @@ body {
 
 
 
-#welcome-dl {
-	position: absolute;
-	right: 15%;
-	top: 7%;
-}
-
-
-#welcome-dl p {
-	margin: 0;
-	text-align: center;
-}
-
-#welcome-logo {
-	padding-top: 4%;
-	text-align: center;
-}
 
 #welcome-separator {
 	height: 5px;
@@ -67,67 +39,4 @@ body {
 	margin-bottom: 1em;
 	margin-top: 1em;
 }
-
-#welcome-ep {
-	margin: 0 auto;
-	text-align: center;
-}
-
-.welcome-desc {
-	font-weight: bold;
-	font-size: 2em;
-	margin-top: 1em;
-	margin-bottom: 1.5em;
-}
-
-.index-ep {
-	font-size: 1.7em;
-	margin-left: 2em;
-	padding-right: 32px;
-}
-
-.info-main {
-	font-size: 1.4em;
-	color: #b23e4b;
-}
-
-.info-main a:hover {
-	text-decoration: underline;
-}
-
-.info-details {
-	font-size: 1.0em;
-}
-
-
-/* Both Welcome and Top Menu */
-
-.ep {
-	background-color: white;
-	color: #b23e4b;
-}
-
-.ep span.glyphicon {
-	padding-left: 7px;
-	color: black;
-}
-
-.ep:hover, .ep:hover span, .ep-selected {
-	background-color: #CA2721 !important;
-	border-bottom: solid #CA2721 2px;
-	color: white;
-	text-decoration: none;
-}
-
-.ep-selected:hover {
-	background-color: #CA2721 !important;
-	border-bottom: solid #CA2721 2px;
-	color: white;
-}
-
-.ep > .caret {
-	border-top-color: transparent;
-	border-bottom-color: transparent;
-}
-
 
