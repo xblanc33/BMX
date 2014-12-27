@@ -25,13 +25,28 @@
 <nav class="sidebar top" id="affix-nav" >
 	<ul class="nav sidenav affix" data-spy="affix">
 		<li>
-			<a href="#contact" ng-click="$event.preventDefault()">contact</a>
+			<a href="#historique" ng-click="$event.preventDefault() ; scrollInto('historique')">Historique</a>
 		</li>
 		<li>
-			<a href="#localisation" ng-click="$event.preventDefault()">localisation</a>
+			<a href="#contact" ng-click="$event.preventDefault() ; scrollInto('contact')">Contact</a>
 		</li>
 		<li>
-			<a href="#tarifs" ng-click="$event.preventDefault()">tarifs</a>
+			<a href="#dirigeant" ng-click="$event.preventDefault() ; scrollInto('dirigeant')">Dirigeants</a>
+		</li>
+		<li>
+			<a href="#partenaires" ng-click="$event.preventDefault() ; scrollInto('partenaires')">Partenaires</a>
+		</li>
+		<li>
+			<a href="#statuts" ng-click="$event.preventDefault() ; scrollInto('statuts')">Statuts</a>
+		</li>
+		<li>
+			<a href="#boutique" ng-click="$event.preventDefault() ; scrollInto('boutique')">Boutique</a>
+		</li>
+		<li>
+			<a href="#tarifs" ng-click="$event.preventDefault() ; scrollInto('tarifs')">Tarifs</a>
+		</li>
+		<li>
+			<a href="#localisation" ng-click="$event.preventDefault() ; scrollInto('localisation')" >Localisation</a>
 		</li>
 	</ul>
 </nav>
@@ -43,6 +58,12 @@
 		<div class="jumbotron">
 		  <h1>BMX Club Canéjan</h1>
 		  <p>Amateurs, initiés ou compétiteurs, venez nous rejoindre pour pratiquer le BMX, votre sport. Nous sommes tous des passionnés pret à vous accueillir sur notre magnifique piste. De plus, notre équipe d'encadrants, composée d'un brevet d'état salarié, d'un brevet fédéral niveau 2 bénévole et de 3 brevets fédéral niveau 1 eux aussi bénévoles, saura vous faire progresser pour atteindre vos objectifs.</p>
+		</div>
+
+		<div id="historique" class="panel panel-default scrolled-section">
+			<div class="panel-heading">Historique</div>
+			<div class="panel-body">
+			</div>
 		</div>
 
 		<div id="contact" class="panel panel-default">
@@ -79,16 +100,27 @@
 			</div>
 		</div>
 
-		<div id="localisation" class="panel panel-default">
-			<div class="panel-heading">Venir au Club</div>
+		<div id="dirigeant" class="panel panel-default scrolled-section">
+			<div class="panel-heading">Equipe Dirigeante</div>
 			<div class="panel-body">
-			<address>
-			  <strong>Adresse Postale</strong><br>
-			  Canéjan Bmx Club.<br>
-			  Stade des Peyrères, chemin des Peyrères<br>
-			  33610 Canéjan
-			</address>
-			<iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d4533.240836399214!2d-0.6477419549371767!3d44.7609027902455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sbmx+club+can%C3%A9jan!5e1!3m2!1sfr!2sfr!4v1418491032583" width="600" height="450" frameborder="0" style="border:0"></iframe>
+			</div>
+		</div>
+
+		<div id="partenaires" class="panel panel-default scrolled-section">
+			<div class="panel-heading">Partenaires</div>
+			<div class="panel-body">
+			</div>
+		</div>
+
+		<div id="statuts" class="panel panel-default scrolled-section">
+			<div class="panel-heading">Statuts</div>
+			<div class="panel-body">
+			</div>
+		</div>
+
+		<div id="boutique" class="panel panel-default scrolled-section">
+			<div class="panel-heading">Boutique</div>
+			<div class="panel-body">
 			</div>
 		</div>
 
@@ -154,31 +186,22 @@
 				</table>
 			</div>
 		</div>
+		
 
-		<div id="location" class="panel panel-default scrolled-section">
-			<div class="panel-heading">Location de vélo</div>
+		<div id="localisation" class="panel panel-default">
+			<div class="panel-heading">Venir au Club</div>
 			<div class="panel-body">
-				<p>Pour les adhérents, le club propose de louer des vélos.  42 vélos disponibles dans le cadre du projet club  <strong>BMX pour tous</strong>.<p>
-				<p> 135 € la location annuelle.</p>
+			<address>
+			  <strong>Adresse Postale</strong><br>
+			  Canéjan Bmx Club.<br>
+			  Stade des Peyrères, chemin des Peyrères<br>
+			  33610 Canéjan
+			</address>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d4533.240836399214!2d-0.6477419549371767!3d44.7609027902455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sbmx+club+can%C3%A9jan!5e1!3m2!1sfr!2sfr!4v1418491032583" width="600" height="450" frameborder="0" style="border:0"></iframe>
 			</div>
 		</div>
 
-		<div id="activite" class="panel panel-default scrolled-section">
-			<div class="panel-heading">Organisation d'activité encadrée</div>
-			<div class="panel-body">
-				<p>Nous proposons ces activités encadrées par un éducateur brevet d’état salarié du club.</p>
-				<p>Accueil de centre de loisirs (CSLH) pendant les vacances scolaires.</p>
-				<p>Point fort Aventure Gironde (juillet et août) en partenariat avec le Conseil Général</p>
-				<p>Accompagnement éducatif pour les collèges</p>
-				<p>Activités péri-scolaires pour les primaires</p>
-			</div>
-		</div>
-
-		<div id="statuts" class="panel panel-default scrolled-section">
-			<div class="panel-heading">Statuts</div>
-			<div class="panel-body">
-			</div>
-		</div>
+		
 	</div>
 </div>
 
