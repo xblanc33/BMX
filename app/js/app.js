@@ -23,7 +23,7 @@ app.config(['$routeProvider', function($rp){
 }])
 
 app.controller('clubController', ['$scope', '$window', function($scope, $window){
-    $('body').scrollspy({ target: '#affix-nav'})
+    $('body').scrollspy({ target: '#affix-nav', offset:70})
 }])
 
 
