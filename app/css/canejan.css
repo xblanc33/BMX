@@ -2,17 +2,17 @@ body {
 	background-color: #03080B;
 }
 
-.container {
-	padding-top: 130px;
-}
-
-.navbar {
+/*.navbar {
 	background: #000000 url("../img/logo-small.jpg") no-repeat right top;
 	height: 120px;
+}*/
+
+.top {
+	padding-top: 60px;
 }
 
 .top-buffer { 
-	margin-top:130px; 
+	margin-top:10px; 
 }
 
 #navbar {
@@ -23,37 +23,26 @@ body {
 	font-size: 2em;
 }
 
-.affixbar {
-	position: fixed;
-	width: 15%;
-}
 
-.affixscrolled {
-	float: right;
-	width:85%;
-}
-
-#affix li {
-	background-color: white;
-}
-
-#affix li:active {
-	background-color: red;
-}
-
-
-.button {
-	display: inline-block;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	border: solid #d5dce0 1px;
-	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
-	padding: 6px 19px;
-}
-
-.button a, .button a:hover {
+.button, .button:hover {
 	color: inherit;
+	text-decoration: none;
+}
+
+.button p {
+	text-align: center;
+}
+
+.button img {
+	display: block;
+	margin-left: auto;
+    margin-right: auto
+}
+
+.button img:hover, .button p:hover  {
+	background-color: #CA2721 !important;
+	border-bottom: solid #CA2721 2px;
+	color: white;
 	text-decoration: none;
 }
 
@@ -65,11 +54,6 @@ body {
 	top: 7%;
 }
 
-#last-update {
-	position: absolute;
-	left: 3%;
-	top: 7%;
-}
 
 #welcome-dl p {
 	margin: 0;
@@ -84,7 +68,8 @@ body {
 #welcome-separator {
 	height: 5px;
 	background-color: #CA2721;
-	margin-bottom: 3em;
+	margin-bottom: 1em;
+	margin-top: 1em;
 }
 
 #welcome-ep {
