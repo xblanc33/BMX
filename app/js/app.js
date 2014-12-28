@@ -71,7 +71,24 @@ app.controller('competController', ['$scope', '$window', function($scope, $windo
         {
             tmpl_path: "components/bootstrap-calendar/tmpls/",
             language: 'fr-FR',
-            events_source: function () { return []; }
+            events_source: function () { return [
+            	{
+		           "id": 1,
+		           "title": "Noel",
+		           "url": "http://fr.wikipedia.org/wiki/No%C3%ABl",
+		           "class": "event-important",
+		           "start": 1419461700000, // Milliseconds
+		           "end": 1419461940000 // Milliseconds
+		       },
+		       {
+		           "id": 2,
+		           "title": "Jours de l'an",
+		           "url": "http://fr.wikipedia.org/wiki/Jour_de_l%27an",
+		           "class": "event-important",
+		           "start": 1420066801000, // Milliseconds
+		           "end": 1420066801001 // Milliseconds
+		       }
+		    ]; }
         }
     ); 
 
