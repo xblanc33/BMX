@@ -65,6 +65,17 @@ app.controller('animationController', ['$scope', '$window', function($scope, $wi
 app.controller('competController', ['$scope', '$window', function($scope, $window){
     $('body').scrollspy({ target: '#affix-nav', offset:70})
 
+
+    //Calendar
+    $scope.calendar = $("#calendar").calendar(
+        {
+            tmpl_path: "components/bootstrap-calendar/tmpls/",
+            language: 'fr-FR',
+            events_source: function () { return []; }
+        }
+    ); 
+
+    //Scrolling
     $scope.scrollInto = function (elementId) {
 		console.log("scollInto:"+elementId)
 		if(!elementId) $window.scrollTo(0, 0);

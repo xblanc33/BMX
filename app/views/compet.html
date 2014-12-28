@@ -52,6 +52,22 @@
 		<div id="calendrier" class="panel panel-default">
 			<div class="panel-heading">Calendrier</div>
 			<div class="panel-body">
+
+				<h3>{{calendar.getTitle()}}</h3>
+
+				<div class="btn-group" role="group" aria-label="...">
+				  <button type="button" class="btn btn-default" ng-click="calendar.navigate('prev')"> << Prev </button>
+				  <button type="button" class="btn btn-default" ng-click="calendar.navigate('today')">Today</button>
+				  <button type="button" class="btn btn-default" ng-click="calendar.navigate('next')">Next >></button>
+				</div>
+
+				<div class="btn-group" role="group" aria-label="...">
+				  <button type="button" class="btn btn-default" ng-click="calendar.view('year')"> Year </button>
+				  <button type="button" class="btn btn-default" ng-click="calendar.view('month')">Month</button>
+				  <button type="button" class="btn btn-default" ng-click="calendar.view('week')">Week</button>
+				</div>
+
+				<div id="calendar"></div>
 			</div>
 		</div>
 
