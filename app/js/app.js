@@ -1,4 +1,4 @@
-var app=angular.module('appBMX',['ngRoute' , 'ngAnimate'])//, 'waypoint-module'])
+var app=angular.module('appBMX',['ngRoute' , 'ngAnimate' , 'bmxServices'])//, 'waypoint-module'])
 
 /*app.controller('scrollSpyCtrl', function ($scope, $anchorScroll) {
 	$scope.test="ok"

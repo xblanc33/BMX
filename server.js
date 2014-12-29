@@ -19,40 +19,81 @@ ws.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 mong_client.connect(db_url, function(err, db){
 	if (err) throw err;
 
-	db.collection("messages", function(err, msg_col) {
+	db.collection("events", function(err, events_col) {
 		if (err) {
-			console.log("messages collection cannot be fetched nor created")
+			console.log("events collection cannot be fetched nor created")
 			throw err
 		}
-		else console.log("collection is ok")
+		else console.log("events collection is ok")
 
-		//return all messages
-		ws.get('/messages', function(req, res) {
-			console.log("get messages")
-			msg_col.find().toArray(function (err, msg) {
+		//return all events
+		ws.get('/events', function(req, res) {
+			console.log("get events")
+			events_col.find().toArray(function (err, events) {
 				if (!err) {
-					console.log("find is ok")
-					res.send(JSON.stringify(msg))
+					console.log("find events is ok")
+					res.send(JSON.stringify(events))
 				}
 				else res.send(err)
 			})
 		})
 
-		//return messages of a specific kind
-		ws.get('/messages/:kind', function(req, res) {
-			msg_col.find({kind:req.params.kind}).toArray(function (err, msg) {
-				if (!err) res.send(JSON.stringify(msg))
+		//return event with id
+		ws.get('/events/:id', function(req, res) {
+			events_col.find({id:req.params.id}).toArray(function (err, evt) {
+				if (!err) res.send(JSON.stringify(evt))
 				else res.send(err)
 			})
 		})
 
-		//post a new message
-		ws.post('/messages',function(req,res) {
+		//post a new event
+		ws.post('/events',function(req,res) {
+			//TODO Login Password
 			console.log("post")
-			console.log("msg:"+req.body)
-			console.log("msg:"+JSON.stringify(req.body))
-			msg_col.insert(req.body, function(err,imsg) {
-				if (!err) res.send(imsg)
+			console.log("event:"+req.body)
+			console.log("event:"+JSON.stringify(req.body))
+			events_col.insert(req.body, function(err,evt) {
+				if (!err) res.send(evt)
+				else res.send(err)
+			})
+		})
+	})
+
+	db.collection("inscriptions", function(err, inscriptions_col) {
+		if (err) {
+			console.log("inscriptions collection cannot be fetched nor created")
+			throw err
+		}
+		else console.log("inscriptions collection is ok")
+
+		//return all events
+		ws.get('/inscriptions', function(req, res) {
+			console.log("get inscriptions")
+			inscriptions_col.find().toArray(function (err, inscriptions) {
+				if (!err) {
+					console.log("find inscriptions is ok")
+					res.send(JSON.stringify(inscriptions))
+				}
+				else res.send(err)
+			})
+		})
+
+		//return event with id
+		ws.get('/inscriptions/:event_id', function(req, res) {
+			inscriptions_col.find({event_id:req.params.event_id}).toArray(function (err, inscriptions) {
+				if (!err) res.send(JSON.stringify(inscriptions))
+				else res.send(err)
+			})
+		})
+
+		//post a new event
+		ws.post('/inscriptions',function(req,res) {
+			//TODO Login Password
+			console.log("post")
+			console.log("inscriptions:"+req.body)
+			console.log("inscriptions:"+JSON.stringify(req.body))
+			inscriptions_col.insert(req.body, function(err,evt) {
+				if (!err) res.send(evt)
 				else res.send(err)
 			})
 		})
