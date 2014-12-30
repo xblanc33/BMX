@@ -96,7 +96,7 @@ ctrls.controller('adminController', ['$scope' , 'EventsService', function($scope
         $scope.new_event["start"] = $scope.new_event["start"].getTime()
         $scope.new_event["end"] = $scope.new_event["end"].getTime()
         $scope.new_event.class= "event-important"
-        $scope.new_event.id= $scope.events.length
+        //$scope.new_event.id= $scope.events.length
         $EventsService.save($scope.new_event)
         $scope.events.push($scope.new_event)
 

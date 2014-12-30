@@ -7,6 +7,7 @@ var bodyParser = require('body-parser')
 
 
 var mong_client= require('mongodb').MongoClient
+var ObjectID= require('mongodb').ObjectID
 var ws= express()
 
 //files for HTML pages
@@ -71,9 +72,9 @@ mong_client.connect(db_url, function(err, db){
 		})
 
 		//delete a new event
-		ws.delete('/events/:id',function(req,res) {
+		ws.delete('/events',function(req,res) {
 			//TODO Login Password
-			events_col.findAndRemove({"id":parseInt(req.params.id)}, [['id', 1]], function(err,evt) {
+			events_col.findAndRemove({"_id": new ObjectID(req.query._id)}, [['_id', 1]], function(err,evt) {
 				if (!err) {
 					res.send({})
 				}
