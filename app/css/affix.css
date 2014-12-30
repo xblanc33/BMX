@@ -25,6 +25,10 @@ li.active {
 	display: inline-block;
 }
 
+.admin-main {
+	padding-top:60px;
+}
+
 
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 1199px) {

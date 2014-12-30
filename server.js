@@ -21,21 +21,36 @@ mong_client.connect(db_url, function(err, db){
 
 	db.collection("events", function(err, events_col) {
 		if (err) {
-			console.log("events collection cannot be fetched nor created")
 			throw err
 		}
 		else console.log("events collection is ok")
 
 		//return all events
 		ws.get('/events', function(req, res) {
-			console.log("get events")
 			events_col.find().toArray(function (err, events) {
 				if (!err) {
-					console.log("find events is ok")
 					res.send(JSON.stringify(events))
 				}
 				else res.send(err)
 			})
+		})
+
+		ws.get("/events-calendar", function(req, res) {
+			events_col.find().toArray(function (err, events) {
+				if (!err) {
+					results={}
+					results.success= 1
+					results.result=[]
+					for (var i = events.length - 1; i >= 0; i--) {
+						console.log(JSON.stringify(events[i]))
+
+						if ((events[i].start >= req.query.from) && (events[i].end <= req.query.to))
+							 results.result.push(events[i])
+					}
+					res.send(JSON.stringify(results))
+				}
+				else res.send({"success":0})
+			})	
 		})
 
 		//return event with id
@@ -49,29 +64,31 @@ mong_client.connect(db_url, function(err, db){
 		//post a new event
 		ws.post('/events',function(req,res) {
 			//TODO Login Password
-			console.log("post")
-			console.log("event:"+req.body)
-			console.log("event:"+JSON.stringify(req.body))
 			events_col.insert(req.body, function(err,evt) {
 				if (!err) res.send(evt)
+				else res.send(err)
+			})
+		})
+
+		//delete a new event
+		ws.delete('/events/:id',function(req,res) {
+			//TODO Login Password
+			events_col.findAndRemove({"id":parseInt(req.params.id)}, [['id', 1]], function(err,evt) {
+				if (!err) {
+					res.send({})
+				}
 				else res.send(err)
 			})
 		})
 	})
 
 	db.collection("inscriptions", function(err, inscriptions_col) {
-		if (err) {
-			console.log("inscriptions collection cannot be fetched nor created")
-			throw err
-		}
-		else console.log("inscriptions collection is ok")
+		if (err) throw err
 
 		//return all events
 		ws.get('/inscriptions', function(req, res) {
-			console.log("get inscriptions")
 			inscriptions_col.find().toArray(function (err, inscriptions) {
 				if (!err) {
-					console.log("find inscriptions is ok")
 					res.send(JSON.stringify(inscriptions))
 				}
 				else res.send(err)
@@ -89,9 +106,6 @@ mong_client.connect(db_url, function(err, db){
 		//post a new event
 		ws.post('/inscriptions',function(req,res) {
 			//TODO Login Password
-			console.log("post")
-			console.log("inscriptions:"+req.body)
-			console.log("inscriptions:"+JSON.stringify(req.body))
 			inscriptions_col.insert(req.body, function(err,evt) {
 				if (!err) res.send(evt)
 				else res.send(err)
