@@ -38,8 +38,12 @@ ctrls.controller('animationController', ['$scope', '$window', function($scope, $
     }
 }])
 
-ctrls.controller('competController', ['$scope', '$window', 'EventsService' , function($scope, $window, $EventsService){
+ctrls.controller('competController', ['$scope', '$window', 'EventsService', 'InscriptionsService' , function($scope, $window, $EventsService, $InscriptionsService){
     $('body').scrollspy({ target: '#affix-nav', offset:70})
+
+    $scope.inscriptions_ouvertes= $EventsService.query({'inscription':true})
+
+    $scope.new_inscription={}
 
 
     //Calendar
@@ -47,7 +51,8 @@ ctrls.controller('competController', ['$scope', '$window', 'EventsService' , fun
         {
             tmpl_path: "components/bootstrap-calendar/tmpls/",
             language: 'fr-FR',
-            events_source: './events-calendar'
+            events_source: './events'
+            //events_source: './events-calendar'
         }
     ); 
 
@@ -66,6 +71,23 @@ ctrls.controller('competController', ['$scope', '$window', 'EventsService' , fun
             $($window).scrollTo($(el),1000,  {offset:-60} );//scrollIntoView();
         }
     }
+
+    //modal inscription
+    $scope.showModal = function () {
+        $('#inscription-modal').modal('show')
+    }
+
+    $scope.hideModal = function () {
+        $('#inscription-modal').modal('hide')
+    }
+
+    $scope.saveNewInscription = function() {
+        $InscriptionsService.save($scope.new_inscription)
+
+        $scope.new_inscription={}
+
+        $scope.hideModal()
+    }
 }])
 
 
@@ -78,7 +100,7 @@ ctrls.controller('homeController', ['$scope' , function($scope) {
 }])
 
 
-ctrls.controller('adminController', ['$scope' , 'EventsService', function($scope , $EventsService) {
+ctrls.controller('adminController', ['$scope' , 'EventsService', 'InscriptionsService' , function($scope , $EventsService, $InscriptionsService) {
     $scope.events=[]
     $scope.events = $EventsService.query();
 
@@ -90,11 +112,11 @@ ctrls.controller('adminController', ['$scope' , 'EventsService', function($scope
     })
 
     $scope.showModal = function () {
-        $('#test-modal').modal('show')
+        $('#new-event-modal').modal('show')
     }
 
     $scope.hideModal = function () {
-        $('#test-modal').modal('hide')
+        $('#new-event-modal').modal('hide')
     }
 
     $scope.saveNewEvent = function() {
@@ -113,5 +135,14 @@ ctrls.controller('adminController', ['$scope' , 'EventsService', function($scope
     $scope.remove = function (event) {
         $EventsService.remove(event)
         $scope.events= $EventsService.query()
+    }
+
+    $scope.show = function (event) {
+        $scope.show_event= event;
+
+        $scope.show_event.inscriptions= $InscriptionsService.query({'event_id': event._id})
+
+        $('#existing-event-modal').modal('show')
+
     }
 }])

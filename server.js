@@ -28,12 +28,41 @@ mong_client.connect(db_url, function(err, db){
 
 		//return all events
 		ws.get('/events', function(req, res) {
-			events_col.find().toArray(function (err, events) {
-				if (!err) {
-					res.send(JSON.stringify(events))
-				}
-				else res.send(err)
-			})
+			if (('from' in req.query) && ('to' in req.query)) { //This route is for Calendar
+				var req_from= parseInt(req.query.from)
+				var req_to= parseInt(req.query.to)
+				var results={}
+				results.success= 1
+				results.result=[]
+				//console.log("from: "+from+" to: "+to)
+				events_col.find({'start': {$gte:req_from} , 'end':{$lte:req_to}}).toArray(function (err, events) {
+					if (!err) {
+						results.result= events
+						res.send(JSON.stringify(results))
+					} else res.send(err)
+				})
+			} else if ('inscription' in req.query) { //This route gets only event with open inscription
+				console.log("inscription")
+				var today= new Date()
+				events_col.find({'inscription': true }).toArray(function (err, events) {
+					if (!err) {
+						var result=[]
+						for (var i = events.length - 1; i >= 0; i--) {
+							var date= new Date(events[i].date_inscription)
+							console.log(date)
+							if (today <= date) {
+								result.push(events[i])
+							}
+						};
+						res.send(JSON.stringify(result))
+					} else res.send(err)
+				})
+			} else {
+				events_col.find().toArray(function (err, events) {
+					if (!err) res.send(JSON.stringify(events))
+					else res.send(err)
+				})
+			}
 		})
 
 
@@ -65,25 +94,6 @@ mong_client.connect(db_url, function(err, db){
 			})
 		})
 
-		//Service used by the Calendar component
-		ws.get("/events-calendar", function(req, res) {
-			events_col.find().toArray(function (err, events) {
-				if (!err) {
-					results={}
-					results.success= 1
-					results.result=[]
-					for (var i = events.length - 1; i >= 0; i--) {
-						console.log(JSON.stringify(events[i]))
-
-						if ((events[i].start >= req.query.from) && (events[i].end <= req.query.to))
-							 results.result.push(events[i])
-					}
-					res.send(JSON.stringify(results))
-				}
-				else res.send({"success":0})
-			})	
-		})
-
 	})
 
 	db.collection("inscriptions", function(err, inscriptions_col) {
@@ -91,20 +101,20 @@ mong_client.connect(db_url, function(err, db){
 
 		//return all events
 		ws.get('/inscriptions', function(req, res) {
-			inscriptions_col.find().toArray(function (err, inscriptions) {
-				if (!err) {
-					res.send(JSON.stringify(inscriptions))
-				}
-				else res.send(err)
-			})
-		})
-
-		//return event with id
-		ws.get('/inscriptions/:event_id', function(req, res) {
-			inscriptions_col.find({event_id:req.params.event_id}).toArray(function (err, inscriptions) {
-				if (!err) res.send(JSON.stringify(inscriptions))
-				else res.send(err)
-			})
+			if ('event_id' in req.query) { //This route return inscription for an event
+				inscriptions_col.find({event_id:req.query.event_id}).toArray(function (err, inscriptions) {
+					if (!err) res.send(JSON.stringify(inscriptions))
+					else res.send(err)
+				})
+			}
+			else {
+				inscriptions_col.find().toArray(function (err, inscriptions) {
+					if (!err) {
+						res.send(JSON.stringify(inscriptions))
+					}
+					else res.send(err)
+				})
+			}
 		})
 
 		//post a new event

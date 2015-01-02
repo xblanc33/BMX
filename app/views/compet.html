@@ -72,8 +72,14 @@
 		</div>
 
 		<div id="inscriptions" class="panel panel-default">
-			<div class="panel-heading">Inscriptions</div>
+			<div class="panel-heading">Inscriptions Ouvertes</div>
 			<div class="panel-body">
+				<ul>
+					<li ng-repeat="inscription in inscriptions_ouvertes"> {{inscription.title}} 
+						<!--<button type="button" class="btn btn-danger" ng-click="remove(event)">Supprimer</button>-->
+					</li>
+				</ul>
+				<button type="button" class="btn btn-default" ng-click="showModal()">S'inscrire à une compétition</button>
 			</div>
 		</div>
 
@@ -97,3 +103,52 @@
 	</div>
 
 </div>
+
+<div class="modal fade" id="inscription-modal">
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	      <h4 class="modal-title">Inscription à une compétition</h4>
+	    </div>
+	    <div class="modal-body">
+	      <form class="form-horizontal">
+	      	<div class="form-group">
+	      		<label for="input-inscription-competition" class="col-sm-2 control-label">Competition
+	      		</label>
+    			<div class="col-sm-10">
+	      			<select id="input-inscription-competition" class="form-control" ng-model="new_inscription.event_id">
+  						<option ng-repeat="inscription in inscriptions_ouvertes" value="{{inscription._id}}">{{inscription.title}}</option>
+  					</select>
+	      		</div>
+	      	</div>
+	      	<div class="form-group">
+	      		<label for="input-inscription-nom" class="col-sm-2 control-label">Nom
+	      		</label>
+    			<div class="col-sm-10">
+	      			<input id="input-inscription-nom" type="text" ng-model="new_inscription.nom" /><br />
+	      		</div>
+	      	</div>
+	      	<div class="form-group">
+	      		<label for="input-inscription-prenom" class="col-sm-2 control-label">Prénom
+	      		</label>
+	      		<div class="col-sm-10">
+    				<input id="input-inscription-prenom" type="text" ng-model="new_inscription.prenom" /><br />
+    			</div>
+    		</div>
+    		<div class="form-group">
+    			<label for="input-inscription-licence" class="col-sm-2 control-label">Licence
+	      		</label>
+	      		<div class="col-sm-10">
+    				<input id="input-inscription-licence" type="text" ng-model="new_inscription.licence" /><br />
+				</div>
+    		</div>
+	      </form>
+	    </div>
+	    <div class="modal-footer">
+	      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      <button type="button" class="btn btn-primary" ng-click="saveNewInscription()">Save changes</button>
+	    </div>
+	  </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

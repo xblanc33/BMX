@@ -23,7 +23,8 @@ services.factory('InscriptionsService', ['$resource',
 
     return $resource('./inscriptions/:id', {}, {
       query: {method:'GET', isArray:true},
-      get: {method:'GET', isArray:true}
+      get: {method:'GET', isArray:true},
+      save: {method:'POST', isArray:true}
     });
   }
 ]);
