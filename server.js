@@ -119,10 +119,24 @@ mong_client.connect(db_url, function(err, db){
 		//post a new event
 		ws.post('/inscriptions',function(req,res) {
 			//TODO Login Password
-			inscriptions_col.insert(req.body, function(err,evt) {
-				if (!err) res.send(evt)
-				else res.send(err)
-			})
+			var req_event_id= req.body.event_id
+			var req_nom= req.body.nom
+			var req_prenom= req.body.prenom
+			var req_licence= req.body.licence
+
+			inscriptions_col.find({event_id:req_event_id, nom: req_nom, prenom: req_prenom, licence: req_licence}).toArray(
+				function (err, existing) {
+					if (!err) {
+						if (existing.length===0) {
+							inscriptions_col.insert(req.body, function(err,evt) {
+								if (!err) res.send({result:1}) //OK
+								else res.send(err) //KO
+							})
+						}
+						else res.send({result:2}) //already in base
+					}
+					else res.send(err)
+				})
 		})
 	})
 

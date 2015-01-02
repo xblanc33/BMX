@@ -74,6 +74,9 @@ ctrls.controller('competController', ['$scope', '$window', 'EventsService', 'Ins
 
     //modal inscription
     $scope.showModal = function () {
+        $scope.new_inscription={}
+        $scope.new_inscription.success=false
+        $scope.new_inscription.already=false
         $('#inscription-modal').modal('show')
     }
 
@@ -82,11 +85,14 @@ ctrls.controller('competController', ['$scope', '$window', 'EventsService', 'Ins
     }
 
     $scope.saveNewInscription = function() {
-        $InscriptionsService.save($scope.new_inscription)
+        $InscriptionsService.save($scope.new_inscription , function(response) {
+            console.log("save inscription"+JSON.stringify(response))
+            if (response.result===1) $scope.new_inscription.success=true
+            else if (response.result===2) $scope.new_inscription.already=true
+        })
 
-        $scope.new_inscription={}
 
-        $scope.hideModal()
+        //$scope.hideModal()
     }
 }])
 
@@ -143,8 +149,6 @@ ctrls.controller('adminController', ['$scope' , 'EventsService', 'InscriptionsSe
         $scope.show_event.inscriptions= $InscriptionsService.query({'event_id': event._id} , function(inscriptions) {
             setCSVLink(inscriptions)
         })
-
-        
 
         $('#existing-event-modal').modal('show')
 
