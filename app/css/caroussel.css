@@ -1,19 +1,16 @@
 .carousel-inner > .item > img {
     margin: 0 auto;
 }
-
 .carousel-caption {
-      max-width: 550px;
-      padding: 0 20px;
-      margin:0 auto;
-      margin-top: 600px;
-      text-align:center;
+    max-width: 550px;
+    padding: 0 20px;
+    margin: 0 auto;
+    margin-top: 600px;
+    text-align: center;
 }
-
 .carousel-indicators {
-	bottom:0px;
+    bottom: 0px;
 }
-
 .carousel-indicators li {
-	bottom:0px;
+    bottom: 0px;
 }
