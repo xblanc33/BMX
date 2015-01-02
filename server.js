@@ -36,23 +36,6 @@ mong_client.connect(db_url, function(err, db){
 			})
 		})
 
-		ws.get("/events-calendar", function(req, res) {
-			events_col.find().toArray(function (err, events) {
-				if (!err) {
-					results={}
-					results.success= 1
-					results.result=[]
-					for (var i = events.length - 1; i >= 0; i--) {
-						console.log(JSON.stringify(events[i]))
-
-						if ((events[i].start >= req.query.from) && (events[i].end <= req.query.to))
-							 results.result.push(events[i])
-					}
-					res.send(JSON.stringify(results))
-				}
-				else res.send({"success":0})
-			})	
-		})
 
 		//return event with id
 		ws.get('/events/:id', function(req, res) {
@@ -81,6 +64,26 @@ mong_client.connect(db_url, function(err, db){
 				else res.send(err)
 			})
 		})
+
+		//Service used by the Calendar component
+		ws.get("/events-calendar", function(req, res) {
+			events_col.find().toArray(function (err, events) {
+				if (!err) {
+					results={}
+					results.success= 1
+					results.result=[]
+					for (var i = events.length - 1; i >= 0; i--) {
+						console.log(JSON.stringify(events[i]))
+
+						if ((events[i].start >= req.query.from) && (events[i].end <= req.query.to))
+							 results.result.push(events[i])
+					}
+					res.send(JSON.stringify(results))
+				}
+				else res.send({"success":0})
+			})	
+		})
+
 	})
 
 	db.collection("inscriptions", function(err, inscriptions_col) {

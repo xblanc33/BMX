@@ -84,6 +84,11 @@ ctrls.controller('adminController', ['$scope' , 'EventsService', function($scope
 
     $scope.new_event= {}
 
+    //bootstrap pop
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+
     $scope.showModal = function () {
         $('#test-modal').modal('show')
     }
