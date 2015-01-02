@@ -140,9 +140,48 @@ ctrls.controller('adminController', ['$scope' , 'EventsService', 'InscriptionsSe
     $scope.show = function (event) {
         $scope.show_event= event;
 
-        $scope.show_event.inscriptions= $InscriptionsService.query({'event_id': event._id})
+        $scope.show_event.inscriptions= $InscriptionsService.query({'event_id': event._id} , function(inscriptions) {
+            setCSVLink(inscriptions)
+        })
+
+        
 
         $('#existing-event-modal').modal('show')
 
+    }
+
+    function inscription2CSV(inscriptions) {
+        var result="nom,prenom,licence\n"
+        for (var i = inscriptions.length - 1; i >= 0; i--) {
+            result+=inscriptions[i].nom+","+inscriptions[i].prenom+","+inscriptions[i].licence+"\n"
+        };
+        console.log(result)
+        return result
+    }
+
+    function setCSVLink(inscriptions) {
+        var link = document.getElementById("csv_download");
+        link.removeAttribute("href")
+        link.removeAttribute("download")
+
+        if (link.download !== undefined) { // feature detection
+            // Browsers that support HTML5 download attribute
+            var blob = new Blob([inscription2CSV(inscriptions)], { type: 'text/csv;charset=utf-8;' });
+            var url = URL.createObjectURL(blob);            
+            link.setAttribute("href", url);
+            link.setAttribute("download", "inscriptions.csv");
+            //link.style = "visibility:hidden";
+        }
+
+        if (navigator.msSaveBlob) { // IE 10+
+           link.addEventListener("click", function (event) {
+             var blob = new Blob([inscription2CSV(inscriptions)], {
+               "type": "text/csv;charset=utf-8;"
+             });
+           navigator.msSaveBlob(blob, "inscriptions.csv");
+          }, false);
+        }
+
+        //document.body.appendChild(link);
     }
 }])

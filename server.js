@@ -42,14 +42,13 @@ mong_client.connect(db_url, function(err, db){
 					} else res.send(err)
 				})
 			} else if ('inscription' in req.query) { //This route gets only event with open inscription
-				console.log("inscription")
+				//console.log("inscription")
 				var today= new Date()
 				events_col.find({'inscription': true }).toArray(function (err, events) {
 					if (!err) {
 						var result=[]
 						for (var i = events.length - 1; i >= 0; i--) {
 							var date= new Date(events[i].date_inscription)
-							console.log(date)
 							if (today <= date) {
 								result.push(events[i])
 							}
