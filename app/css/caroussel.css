@@ -12,7 +12,6 @@
 }
 .carousel-indicators {
     bottom: 0px;
-    background-color: #141615;
 }
 .carousel-indicators li {
     bottom: 0px;
@@ -20,4 +19,10 @@
 }
 .carousel {
 	background-color: #141615;
+}
+.carousel-control.left {
+	background-image: none;
+}
+.carousel-control.right {
+	background-image: none;
 }

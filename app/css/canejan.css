@@ -10,8 +10,10 @@ body {
     font-size: 30px;
 }
 .button, .button:hover {
-    color: inherit;
+    color: #CA2721;
     text-decoration: none;
+    text-align: center;
+    font-size:30px;
 }
 .button p {
     text-align: center;
