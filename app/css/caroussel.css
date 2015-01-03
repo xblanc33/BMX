@@ -1,5 +1,6 @@
 .carousel-inner > .item > img {
     margin: 0 auto;
+    background-color: #141615;
 }
 .carousel-caption {
     max-width: 550px;
@@ -7,10 +8,16 @@
     margin: 0 auto;
     margin-top: 600px;
     text-align: center;
+    background-color: #141615;
 }
 .carousel-indicators {
     bottom: 0px;
+    background-color: #141615;
 }
 .carousel-indicators li {
     bottom: 0px;
+    background-color: #141615;
+}
+.carousel {
+	background-color: #141615;
 }

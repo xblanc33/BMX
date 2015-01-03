@@ -145,7 +145,7 @@ mong_client.connect(db_url, function(err, db){
 
 
 //Start server
-var port = 4711;
+var port = 8080;
 ws.listen(port, function () {
     'use strict'
     console.log('Express server listening on port %d in %s mode', port, ws.settings.env)

@@ -1,5 +1,10 @@
 body {
-    background-color: #03080B;
+    /*background-color: #03080B;*/
+    background-color: #141615;
+}
+#banner-bmx{
+    text-align: center;
+    font-size:60px;
 }
 #navbar {
     font-size: 30px;

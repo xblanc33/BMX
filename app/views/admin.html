@@ -16,9 +16,9 @@
                 </li>
                 <li><a id="club" class="menu" href="#/club">Club</a>
                 </li>
-                <li><a id="competition" class="menu" href="#/animation">Animation</a>
+                <li><a id="animation" class="menu" href="#/animation">Animation</a>
                 </li>
-                <li><a id="competition" class="menu" href="#/compet">Compet</a>
+                <li><a id="competition" class="menu" href="#/compet">Competition</a>
                 </li>
                 <li class="active"><a id="admin" class="menu" href="#/admin">Admin</a>
                 </li>
@@ -128,25 +128,25 @@
                 <h4 class="modal-title">Event</h4>
             </div>
             <div class="modal-body">
-                <div>
-                    <h5>Descriptions</h5>
-                    <div><span class="col-sm-2">Title</span><span class="col-sm-10">{{show_event.title}}</span>
-                    </div>
-                    <div><span class="col-sm-2">Url</span><a class="col-sm-10">{{show_event.url}}</a>
-                    </div>
-                    <div><span class="col-sm-2">du</span><span class="col-sm-10">{{show_event.start}}</span>
-                    </div>
-                    <div><span class="col-sm-2">au</span><span class="col-sm-10">{{show_event.end}}</span>
-                    </div>
-                </div>
-                <div>
-                    <h5>Inscriptions <a id="csv_download" href="">(CSV)</a></h5>
+                
+                    <div class="row"><h5>Descriptions</h5></div>
+                    <div class="row"><span class="col-sm-2">Title</span><span class="col-sm-10">{{show_event.title}}</span></div>
+                    
+                    <div class="row"><span class="col-sm-2">Url</span><a class="col-sm-10">{{show_event.url}}</a></div>
+                    
+                    <div class="row"><span class="col-sm-2">du</span><span class="col-sm-10">{{show_event.start}}</span></div>
+                    
+                    <div class="row"><span class="col-sm-2">au</span><span class="col-sm-10">{{show_event.end}}</span></div>
+                    
+                
+                
+                    <div class="row"><h5>Inscriptions <a id="csv_download" href="">(CSV)</a></h5></div>
                     <ul>
                         <li ng-repeat="inscription in show_event.inscriptions">
                             {{inscription.nom}} {{inscription.prenom}}, {{inscription.licence}}
                         </li>
                     </ul>
-                </div>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>

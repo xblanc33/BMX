@@ -16,9 +16,9 @@
                 </li>
                 <li><a id="club" class="menu" href="#/club">Club</a>
                 </li>
-                <li><a id="competition" class="menu" href="#/animation">Animation</a>
+                <li><a id="animation" class="menu" href="#/animation">Animation</a>
                 </li>
-                <li class="active"><a id="competition" class="menu" href="#/compet">Compet</a>
+                <li class="active"><a id="competition" class="menu" href="#/compet">Competition</a>
                 </li>
             </ul>
         </div>
@@ -31,17 +31,15 @@
     <nav class="sidebar top" id="affix-nav">
         <ul class="nav sidenav affix" data-spy="affix">
             <li>
+                <a href="#guide" ng-click="$event.preventDefault() ; scrollInto('guide')">Guide</a>
+            </li>
+            <li>
                 <a href="#calendrier" ng-click="$event.preventDefault() ; scrollInto('calendrier')">Calendrier</a>
             </li>
             <li>
                 <a href="#inscriptions" ng-click="$event.preventDefault() ; scrollInto('inscriptions')">Inscriptions</a>
             </li>
-            <li>
-                <a href="#resultats" ng-click="$event.preventDefault() ; scrollInto('resultats')">Résultats</a>
-            </li>
-            <li>
-                <a href="#guide" ng-click="$event.preventDefault() ; scrollInto('guide')">Guide</a>
-            </li>
+            
         </ul>
     </nav>
 
@@ -51,6 +49,12 @@
         <div class="jumbotron">
             <h1>BMX Compétition à Canéjan</h1>
             <p>Bla bla bla</p>
+        </div>
+
+        <div id="guide" class="panel panel-default">
+            <div class="panel-heading">Guide</div>
+            <div class="panel-body">
+            </div>
         </div>
 
         <div id="calendrier" class="panel panel-default">
@@ -88,17 +92,7 @@
             </div>
         </div>
 
-        <div id="resultats" class="panel panel-default">
-            <div class="panel-heading">Résultats</div>
-            <div class="panel-body">
-            </div>
-        </div>
-
-        <div id="guide" class="panel panel-default">
-            <div class="panel-heading">Guide</div>
-            <div class="panel-body">
-            </div>
-        </div>
+        
 
     </div>
 

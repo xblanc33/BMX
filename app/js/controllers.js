@@ -56,6 +56,8 @@ ctrls.controller('competController', ['$scope', '$window', 'EventsService', 'Ins
         }
     ); 
 
+    $scope.calendar.view('year');
+
     //Scrolling
     $scope.scrollInto = function (elementId) {
 		console.log("scollInto:"+elementId)
