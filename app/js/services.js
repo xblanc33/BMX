@@ -9,9 +9,9 @@ services.factory('EventsService', ['$resource',
     //return $resource('./../api/recipes/:id');
 
     return $resource('./events/:id', {}, {
-      query: {method:'GET', isArray:true},
-      get: {method:'GET', isArray:true},
-      save: {method:'POST', isArray:true}
+      query: {method:'GET', isArray:true , cache:false},
+      get: {method:'GET', isArray:true, cache:false},
+      save: {method:'POST', isArray:true, cache:false}
     });
   }
 ]);
@@ -22,8 +22,8 @@ services.factory('InscriptionsService', ['$resource',
     //return $resource('./../api/recipes/:id');
 
     return $resource('./inscriptions/:id', {}, {
-      query: {method:'GET', isArray:true},
-      get: {method:'GET', isArray:true}
+      query: {method:'GET', isArray:true, cache:false},
+      get: {method:'GET', isArray:true, cache:false}
       //save: {method:'POST', isArray:true}
     });
   }
