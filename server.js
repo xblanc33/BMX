@@ -18,8 +18,8 @@ ws.use(bodyParser.urlencoded({ // to support URL-encoded bodies
 }));
 
 
-
-
+//304 error !!! I don't really understand
+ws.disable('etag');
 
 //return all events
 ws.get('/events', function(req, res) {
