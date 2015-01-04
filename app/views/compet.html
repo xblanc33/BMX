@@ -150,10 +150,75 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-inscription-licence" class="col-sm-2 control-label">Licence
+                        <label for="input-inscription-email" class="col-sm-2 control-label">e-mail
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-inscription-licence" type="text" ng-model="new_inscription.licence" />
+                            <input id="input-inscription-email" type="email" ng-model="new_inscription.email" />
+                            <br />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-inscription-bike" class="col-sm-2 control-label">Votre inscription
+                        </label>
+                        <div class="col-sm-10 checkbox" >
+                            <input id="input-inscription-bike" type="checkbox" ng-model="new_inscription.vingt" />
+                            Je m'inscris en 20 pouces
+                            <br />
+                        </div>
+                        <div class="col-sm-10 col-sm-offset-2 checkbox" >
+                            <input id="input-inscription-bike" type="checkbox" value="cruiser" ng-model="new_inscription.cruiser" />
+                            Je m'inscris en cruiser
+                            <br />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-inscription-plaque" class="col-sm-2 control-label">Numéro de plaque
+                        </label>
+                        <div class="col-sm-10">
+                            <input id="input-inscription-plaque" type="text" ng-model="new_inscription.plaque" />
+                            <br />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-inscription-categorie" class="col-sm-2 control-label">Catégorie
+                        </label>
+                        <div class="col-sm-10">
+                            <input id="input-inscription-categorie" type="text" ng-model="new_inscription.categorie" />
+                            <br />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-inscription-materiel" class="col-sm-2 control-label">Aide au transport du matériel
+                        </label>
+                        <div class="col-sm-10 checkbox" >
+                            <input id="input-inscription-materiel" type="checkbox" ng-model="new_inscription.matin" />
+                            Je peux m'en charger le matin
+                            <br />
+                        </div>
+                        <div class="col-sm-10 col-sm-offset-2 checkbox" >
+                            <input id="input-inscription-materiel" type="checkbox" ng-model="new_inscription.soir" />
+                            Je peux ramener le matériel le soir
+                            <br />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-inscription-arbitre" class="col-sm-2 control-label">Souhaitez-vous être arbitre ?
+                        </label>
+                        <div class="col-sm-10 checkbox" >
+                            <input id="input-inscription-arbitre" type="checkbox" ng-model="new_inscription.arbitre" />
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="new_inscription.arbitre">
+                        <label for="input-inscription-arbitre-quand" class="col-sm-2 control-label">Quand?
+                        </label>
+                        <div class="col-sm-10 checkbox" >
+                            <input id="input-inscription-arbitre-quand" type="checkbox" ng-model="new_inscription.arbitre_matin" />
+                            le matin
+                            <br />
+                        </div>
+                        <div class="col-sm-10 col-sm-offset-2 checkbox" >
+                            <input id="input-inscription-arbitre-quand" type="checkbox" ng-model="new_inscription.arbitre_soir" />
+                            l'après-midi
                             <br />
                         </div>
                     </div>
