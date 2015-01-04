@@ -46,7 +46,9 @@ ws.get('/events', function(req, res) {
                         if (!err) {
                             results.result = events
                             res.send(JSON.stringify(results))
-                        } else res.send(err)
+                        } else res.send(err);
+                        db.close();
+
                     })
                 } else if ('inscription' in req.query) { //This route gets only event with open inscription
                     //console.log("inscription")
@@ -63,12 +65,14 @@ ws.get('/events', function(req, res) {
                                 }
                             };
                             res.send(JSON.stringify(result))
-                        } else res.send(err)
+                        } else res.send(err);
+                        db.close();
                     })
                 } else {
                     events_col.find().toArray(function(err, events) {
                         if (!err) res.send(JSON.stringify(events))
-                        else res.send(err)
+                        else res.send(err);
+                        db.close();
                     })
                 }
             })
@@ -84,13 +88,16 @@ ws.get('/events/:id', function(req, res) {
         if (err) res.send(err);
         else {
             db.collection("events", function(err, events_col) {
-                if (err) res.send(err);
-                else {
+                if (err) {
+                    res.send(err);
+                    db.close();
+                } else {
                     events_col.find({
                         id: req.params.id
                     }).toArray(function(err, evt) {
                         if (!err) res.send(JSON.stringify(evt))
-                        else res.send(err)
+                        else res.send(err);
+                        db.close();
                     })
                 }
             })
@@ -104,12 +111,16 @@ ws.post('/events', function(req, res) {
         if (err) res.send(err);
         else {
             db.collection("events", function(err, events_col) {
-                if (err) throw err;
+                if (err) {
+                    res.send(err);
+                    db.close();
+                }
 
                 //TODO Login Password
                 events_col.insert(req.body, function(err, evt) {
                     if (!err) res.send(evt)
-                    else res.send(err)
+                    else res.send(err);
+                    db.close();
                 })
             })
         }
@@ -122,7 +133,10 @@ ws.delete('/events', function(req, res) {
         if (err) res.send(err);
         else {
             db.collection("events", function(err, events_col) {
-                if (err) throw err;
+                if (err) {
+                    res.send(err);
+                    db.close();
+                }
 
                 //TODO Login Password
                 events_col.findAndRemove({
@@ -132,7 +146,8 @@ ws.delete('/events', function(req, res) {
                 ], function(err, evt) {
                     if (!err) {
                         res.send({})
-                    } else res.send(err)
+                    } else res.send(err);
+                    db.close();
                 })
             })
         }
@@ -146,20 +161,25 @@ ws.get('/inscriptions', function(req, res) {
         if (err) res.send(err);
         else {
             db.collection("inscriptions", function(err, inscriptions_col) {
-                if (err) throw err
+                if (err) {
+                    res.send(err);
+                    db.close();
+                }
 
                 if ('event_id' in req.query) { //This route return inscription for an event
                     inscriptions_col.find({
                         event_id: req.query.event_id
                     }).toArray(function(err, inscriptions) {
                         if (!err) res.send(JSON.stringify(inscriptions))
-                        else res.send(err)
+                        else res.send(err);
+                        db.close();
                     })
                 } else {
                     inscriptions_col.find().toArray(function(err, inscriptions) {
                         if (!err) {
                             res.send(JSON.stringify(inscriptions))
-                        } else res.send(err)
+                        } else res.send(err);
+                        db.close();
                     })
                 }
             })
@@ -173,7 +193,10 @@ ws.post('/inscriptions', function(req, res) {
         if (err) res.send(err);
         else {
             db.collection("inscriptions", function(err, inscriptions_col) {
-                if (err) throw err
+                if (err) {
+                    res.send(err);
+                    db.close();
+                }
 
                 //TODO Login Password
                 var req_event_id = req.body.event_id
@@ -194,12 +217,19 @@ ws.post('/inscriptions', function(req, res) {
                                     if (!err) res.send({
                                             result: 1
                                         }) //OK
-                                    else res.send(err) //KO
+                                    else res.send(err); //KO
+                                    db.close();
                                 })
-                            } else res.send({
+                            } else {
+                                res.send({
                                     result: 2
-                                }) //already in base
-                        } else res.send(err)
+                                }); //already in base
+                                db.close();
+                            }
+                        } else {
+                            res.send(err);
+                            db.close();
+                        }
                     })
             })
         }
