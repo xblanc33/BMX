@@ -123,12 +123,33 @@
                 <h4 class="modal-title">Inscription à une compétition</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+                <div ng-show="!form_inscription.$valide" class="alert alert-warning" role="alert">
+                    <div ng-show="form_inscription.form_event_id.$error.required">
+                        Vous devez choisir une compétition
+                    </div>
+                    <div ng-show="form_inscription.form_nom.$error.required">
+                        Vous devez saisir votre nom
+                    </div>
+                    <div ng-show="form_inscription.form_prenom.$error.required">
+                        Vous devez saisir votre prénom
+                    </div>
+                    <div ng-show="form_inscription.form_email.$error.required">
+                        Vous devez saisir votre email
+                    </div>
+                    <div ng-show="form_inscription.form_plaque.$error.required">
+                        Vous devez saisir votre numéro de plaque
+                    </div>
+                    <div ng-show="form_inscription.form_categorie.$error.required">
+                        Vous devez saisir votre catégorie
+                    </div>
+                </div>
+                <form novalidate class="form-horizontal" name="form_inscription">
+
                     <div class="form-group">
                         <label for="input-inscription-competition" class="col-sm-2 control-label">Competition
                         </label>
                         <div class="col-sm-10">
-                            <select id="input-inscription-competition" class="form-control" ng-model="new_inscription.event_id">
+                            <select required id="input-inscription-competition" name="form_event_id" class="form-control" ng-model="new_inscription.event_id">
                                 <option ng-repeat="inscription in inscriptions_ouvertes" value="{{inscription._id}}">{{inscription.title}}</option>
                             </select>
                         </div>
@@ -137,7 +158,7 @@
                         <label for="input-inscription-nom" class="col-sm-2 control-label">Nom
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-inscription-nom" type="text" ng-model="new_inscription.nom" />
+                            <input required id="input-inscription-nom" name="form_nom" type="text" ng-model="new_inscription.nom" />
                             <br />
                         </div>
                     </div>
@@ -145,7 +166,7 @@
                         <label for="input-inscription-prenom" class="col-sm-2 control-label">Prénom
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-inscription-prenom" type="text" ng-model="new_inscription.prenom" />
+                            <input required id="input-inscription-prenom" name="form_prenom" type="text" ng-model="new_inscription.prenom" />
                             <br />
                         </div>
                     </div>
@@ -153,7 +174,7 @@
                         <label for="input-inscription-email" class="col-sm-2 control-label">e-mail
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-inscription-email" type="email" ng-model="new_inscription.email" />
+                            <input required id="input-inscription-email" name="form_email" type="email" ng-model="new_inscription.email" />
                             <br />
                         </div>
                     </div>
@@ -175,7 +196,7 @@
                         <label for="input-inscription-plaque" class="col-sm-2 control-label">Numéro de plaque
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-inscription-plaque" type="text" ng-model="new_inscription.plaque" />
+                            <input required id="input-inscription-plaque" name="form_plaque" type="text" ng-model="new_inscription.plaque" />
                             <br />
                         </div>
                     </div>
@@ -183,7 +204,7 @@
                         <label for="input-inscription-categorie" class="col-sm-2 control-label">Catégorie
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-inscription-categorie" type="text" ng-model="new_inscription.categorie" />
+                            <input required id="input-inscription-categorie" name="form_categorie" type="text" ng-model="new_inscription.categorie" />
                             <br />
                         </div>
                     </div>
@@ -232,7 +253,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary" ng-click="saveNewInscription()">Valider</button>
+                <button type="submit" class="btn btn-primary" ng-click="saveNewInscription()">Valider</button>
             </div>
         </div>
         <!-- /.modal-content -->
