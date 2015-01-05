@@ -127,13 +127,12 @@ ctrls.controller('homeController', ['$scope', function($scope) {
 
 
 ctrls.controller('adminController', ['$scope', 'EventsService', 'InscriptionsService', function($scope, $EventsService, $InscriptionsService) {
-    $scope.events = []
-    $scope.events = $EventsService.query();
-
-    $scope.new_event = {}
-
     //bootstrap pop
     $(function() {
+        $scope.events = []
+        $scope.new_event = {}
+    
+        $EventsService.query(function(events){$scope.events=events});
         $('[data-toggle="popover"]').popover()
     })
 
@@ -150,11 +149,10 @@ ctrls.controller('adminController', ['$scope', 'EventsService', 'InscriptionsSer
         $scope.new_event["end"] = $scope.new_event["end"].getTime()
         $scope.new_event.class = "event-important"
             //$scope.new_event.id= $scope.events.length
-        $EventsService.save($scope.new_event)
-        $scope.events.push($scope.new_event)
-
+        var copy_event= angular.copy($scope.new_event)
+        $EventsService.save(copy_event , function(saved) {$scope.events.push(saved[0])})
+        
         $scope.new_event = {}
-
         $scope.hideModal()
     }
 
@@ -166,13 +164,13 @@ ctrls.controller('adminController', ['$scope', 'EventsService', 'InscriptionsSer
     $scope.show = function(event) {
         $scope.show_event = event;
 
-        $scope.show_event.inscriptions = $InscriptionsService.query({
+        $InscriptionsService.query({
             'event_id': event._id
         }, function(inscriptions) {
+            $scope.show_event.inscriptions =inscriptions
             setCSVLink(inscriptions)
+            $('#existing-event-modal').modal('show')
         })
-
-        $('#existing-event-modal').modal('show')
 
     }
 
