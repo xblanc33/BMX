@@ -85,7 +85,7 @@
             <div class="panel-body">
                 <ul>
                     <li ng-repeat="inscription in inscriptions_ouvertes"> {{inscription.title}}
-                        <!--<button type="button" class="btn btn-danger" ng-click="remove(event)">Supprimer</button>-->
+                        <button type="button" class="btn btn-default" ng-click="showInscrits(inscription)">Liste Inscrits</button>
                     </li>
                 </ul>
                 <button type="button" class="btn btn-default" ng-click="showModal()">S'inscrire à une compétition</button>
@@ -258,3 +258,27 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+
+<div class="modal fade" id="liste-inscrits">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span>
+                </button>
+                <h4 class="modal-title">Liste des inscrits</h4>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li ng-repeat="inscrit in show_inscrits">{{inscrit.nom}}, {{inscrit.prenom}}</li>
+                </ul>
+                <!--<div ng-hide="form_inscription.$saved" class="alert alert-warning" role="alert">-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

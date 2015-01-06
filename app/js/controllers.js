@@ -114,9 +114,15 @@ ctrls.controller('competController', ['$scope', '$window', 'EventsService', 'Ins
                 else if (response.result === 2) $scope.new_inscription.already = true
             })
         }
-
-
         //$scope.hideModal()
+    }
+
+    $scope.showInscrits = function(event) {
+        $scope.show_inscrits=[]
+        $InscriptionsService.query({event_id:event._id}, function (inscriptions){
+            $scope.show_inscrits=inscriptions
+        })
+        $('#liste-inscrits').modal('show')
     }
 }])
 
