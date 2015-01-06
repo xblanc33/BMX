@@ -123,29 +123,29 @@
                 <h4 class="modal-title">Inscription à une compétition</h4>
             </div>
             <div class="modal-body">
-                <div ng-show="form_inscription.$submitted" class="alert alert-warning" role="alert">
-                    <div ng-show="form_inscription.form_event_id.$error.required">
+                <!--<div ng-hide="form_inscription.$saved" class="alert alert-warning" role="alert">-->
+                    <div ng-show="form_inscription.form_event_id.$error.required" class="alert alert-warning" role="alert">
                         Vous devez choisir une compétition
                     </div>
-                    <div ng-show="form_inscription.form_nom.$error.required">
+                    <div ng-show="form_inscription.form_nom.$error.required" class="alert alert-warning" role="alert">
                         Vous devez saisir votre nom
                     </div>
-                    <div ng-show="form_inscription.form_prenom.$error.required">
+                    <div ng-show="form_inscription.form_prenom.$error.required" class="alert alert-warning" role="alert">
                         Vous devez saisir votre prénom
                     </div>
-                    <div ng-show="form_inscription.form_naissance.$error.required">
+                    <div ng-show="form_inscription.form_naissance.$error.required" class="alert alert-warning" role="alert">
                         Vous devez saisir votre date de naissance
                     </div>
-                    <div ng-show="form_inscription.form_email.$error.required">
+                    <div ng-show="form_inscription.form_email.$error.required" class="alert alert-warning" role="alert">
                         Vous devez saisir votre email
                     </div>
-                    <div ng-show="form_inscription.form_plaque.$error.required">
+                    <div ng-show="form_inscription.form_plaque.$error.required" class="alert alert-warning" role="alert">
                         Vous devez saisir votre numéro de plaque
                     </div>
-                    <div ng-show="form_inscription.form_categorie.$error.required">
+                    <div ng-show="form_inscription.form_categorie.$error.required" class="alert alert-warning" role="alert">
                         Vous devez saisir votre catégorie
                     </div>
-                </div>
+                <!--</div>-->
                 <form novalidate class="form-horizontal" name="form_inscription">
 
                     <div class="form-group">

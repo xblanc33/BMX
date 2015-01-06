@@ -102,9 +102,13 @@ ctrls.controller('competController', ['$scope', '$window', 'EventsService', 'Ins
     }
 
     $scope.saveNewInscription = function() {
-        if (!$scope.form_inscription.$valid) console.log("form not valide")
+        if (!$scope.form_inscription.$valid) {
+            $scope.form_inscription.$saved=false
+            console.log("form not valide")
+        }
         else {
             $InscriptionsService.save($scope.new_inscription, function(response) {
+                $scope.form_inscription.$saved=true
                 console.log("save inscription" + JSON.stringify(response))
                 if (response.result === 1) $scope.new_inscription.success = true
                 else if (response.result === 2) $scope.new_inscription.already = true
