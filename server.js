@@ -21,12 +21,13 @@ ws.use(bodyParser.urlencoded({ // to support URL-encoded bodies
 //304 error !!! I don't really understand
 ws.disable('etag');
 
-//return all events
-ws.get('/events', function(req, res) {
-    mong_client.connect(db_url, function(err, db) {
-        if (err) res.send(err);
-        else {
-            db.collection("events", function(err, events_col) {
+mong_client.connect(db_url, function(err, db) {
+    if (err) res.send(err);
+
+    else {
+		//return all events
+		ws.get('/events', function(req, res) {
+       		db.collection("events", function(err, events_col) {
                 if (err) res.send(err);
                 else if (('from' in req.query) && ('to' in req.query)) { //This route is for Calendar
                     var req_from = parseInt(req.query.from)
@@ -76,17 +77,7 @@ ws.get('/events', function(req, res) {
                     })
                 }
             })
-        }
-    })
-})
-
-
-//return event with id
-ws.get('/events/:id', function(req, res) {
-
-    mong_client.connect(db_url, function(err, db) {
-        if (err) res.send(err);
-        else {
+        }).get('/events/:id', function(req, res) {
             db.collection("events", function(err, events_col) {
                 if (err) {
                     res.send(err);
@@ -101,15 +92,7 @@ ws.get('/events/:id', function(req, res) {
                     })
                 }
             })
-        }
-    })
-})
-
-//post a new event
-ws.post('/events', function(req, res) {
-    mong_client.connect(db_url, function(err, db) {
-        if (err) res.send(err);
-        else {
+        }).post('/events', function(req, res) {
             db.collection("events", function(err, events_col) {
                 if (err) {
                     res.send(err);
@@ -123,15 +106,7 @@ ws.post('/events', function(req, res) {
                     db.close();
                 })
             })
-        }
-    })
-})
-
-//delete a new event
-ws.delete('/events', function(req, res) {
-    mong_client.connect(db_url, function(err, db) {
-        if (err) res.send(err);
-        else {
+        }).delete('/events', function(req, res) {
             db.collection("events", function(err, events_col) {
                 if (err) {
                     res.send(err);
@@ -150,16 +125,7 @@ ws.delete('/events', function(req, res) {
                     db.close();
                 })
             })
-        }
-    })
-})
-
-
-//return all events
-ws.get('/inscriptions', function(req, res) {
-    mong_client.connect(db_url, function(err, db) {
-        if (err) res.send(err);
-        else {
+        }).get('/inscriptions', function(req, res) {
             db.collection("inscriptions", function(err, inscriptions_col) {
                 if (err) {
                     res.send(err);
@@ -183,15 +149,7 @@ ws.get('/inscriptions', function(req, res) {
                     })
                 }
             })
-        }
-    })
-})
-
-//post a new event
-ws.post('/inscriptions', function(req, res) {
-    mong_client.connect(db_url, function(err, db) {
-        if (err) res.send(err);
-        else {
+        }).post('/inscriptions', function(req, res) {
             db.collection("inscriptions", function(err, inscriptions_col) {
                 if (err) {
                     res.send(err);
@@ -232,8 +190,8 @@ ws.post('/inscriptions', function(req, res) {
                         }
                     })
             })
-        }
-    })
+        })
+    }
 })
 
 
