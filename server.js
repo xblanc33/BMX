@@ -48,8 +48,6 @@ mong_client.connect(db_url, function(err, db) {
                             results.result = events
                             res.send(JSON.stringify(results))
                         } else res.send(err);
-                        db.close();
-
                     })
                 } else if ('inscription' in req.query) { //This route gets only event with open inscription
                     //console.log("inscription")
@@ -67,13 +65,11 @@ mong_client.connect(db_url, function(err, db) {
                             };
                             res.send(JSON.stringify(result))
                         } else res.send(err);
-                        db.close();
                     })
                 } else {
                     events_col.find().toArray(function(err, events) {
                         if (!err) res.send(JSON.stringify(events))
                         else res.send(err);
-                        db.close();
                     })
                 }
             })
@@ -81,14 +77,12 @@ mong_client.connect(db_url, function(err, db) {
             db.collection("events", function(err, events_col) {
                 if (err) {
                     res.send(err);
-                    db.close();
                 } else {
                     events_col.find({
                         id: req.params.id
                     }).toArray(function(err, evt) {
                         if (!err) res.send(JSON.stringify(evt))
                         else res.send(err);
-                        db.close();
                     })
                 }
             })
@@ -96,21 +90,18 @@ mong_client.connect(db_url, function(err, db) {
             db.collection("events", function(err, events_col) {
                 if (err) {
                     res.send(err);
-                    db.close();
                 }
 
                 //TODO Login Password
                 events_col.insert(req.body, function(err, evt) {
                     if (!err) res.send(evt)
                     else res.send(err);
-                    db.close();
                 })
             })
         }).delete('/events', function(req, res) {
             db.collection("events", function(err, events_col) {
                 if (err) {
                     res.send(err);
-                    db.close();
                 }
 
                 //TODO Login Password
@@ -122,14 +113,12 @@ mong_client.connect(db_url, function(err, db) {
                     if (!err) {
                         res.send({})
                     } else res.send(err);
-                    db.close();
                 })
             })
         }).get('/inscriptions', function(req, res) {
             db.collection("inscriptions", function(err, inscriptions_col) {
                 if (err) {
                     res.send(err);
-                    db.close();
                 }
 
                 if ('event_id' in req.query) { //This route return inscription for an event
@@ -138,14 +127,12 @@ mong_client.connect(db_url, function(err, db) {
                     }).toArray(function(err, inscriptions) {
                         if (!err) res.send(JSON.stringify(inscriptions))
                         else res.send(err);
-                        db.close();
                     })
                 } else {
                     inscriptions_col.find().toArray(function(err, inscriptions) {
                         if (!err) {
                             res.send(JSON.stringify(inscriptions))
                         } else res.send(err);
-                        db.close();
                     })
                 }
             })
@@ -153,7 +140,6 @@ mong_client.connect(db_url, function(err, db) {
             db.collection("inscriptions", function(err, inscriptions_col) {
                 if (err) {
                     res.send(err);
-                    db.close();
                 }
 
                 //TODO Login Password
@@ -176,17 +162,14 @@ mong_client.connect(db_url, function(err, db) {
                                             result: 1
                                         }) //OK
                                     else res.send(err); //KO
-                                    db.close();
                                 })
                             } else {
                                 res.send({
                                     result: 2
                                 }); //already in base
-                                db.close();
                             }
                         } else {
                             res.send(err);
-                            db.close();
                         }
                     })
             })
