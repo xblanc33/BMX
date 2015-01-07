@@ -34,55 +34,55 @@
         <div class="panel-body">
             <ul>
                 <li ng-repeat="event in events">
-                    <button ng-click="show(event)"> {{event.title}}</button> <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true" ng-click="remove(event)"></span>
+                    <button ng-click="showEvent(event)"> {{event.titre}}</button> <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true" ng-click="removeEvent(event)"></span>
                     <!--<button type="button" class="btn btn-danger" ng-click="remove(event)">Supprimer</button>-->
                 </li>
             </ul>
-            <button type="button" class="btn btn-default" ng-click="showModal()"> Nouvel Evenement</button>
+            <button type="button" class="btn btn-default" ng-click="showEvent({})"> Nouvel Evenement</button>
         </div>
     </div>
 </div>
 
 <!-- Modal for creating a new event -->
-<div class="modal fade" id="new-event-modal">
+<div class="modal fade" id="event-modal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title">Ajout d'un nouvel event</h4>
+                <h4 class="modal-title">Evenement</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label for="input-event-title" class="col-sm-2 control-label">Title
+                        <label for="input-event-title" class="col-sm-2 control-label">Titre
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-event-title" type="text" ng-model="new_event.title" />
+                            <input id="input-event-title" type="text" ng-model="event_modal.titre" />
                             <br />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-event-url" class="col-sm-2 control-label">URL
+                        <label for="input-event-start" class="col-sm-2 control-label">Du
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-event-url" type="url" ng-model="new_event.url" />
+                            <input id="input-event-start" type="date" ng-model="event_modal.du" />
                             <br />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-event-start" class="col-sm-2 control-label">Start
+                        <label for="input-event-end" class="col-sm-2 control-label">Au
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-event-start" type="date" ng-model="new_event.start" />
+                            <input id="input-event-end" type="date" ng-model="event_modal.au" />
                             <br />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-event-end" class="col-sm-2 control-label">End
+                        <label for="input-event-url" class="col-sm-2 control-label">Site Web
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-event-end" type="date" ng-model="new_event.end" />
+                            <input id="input-event-url" type="url" ng-model="event_modal.url" />
                             <br />
                         </div>
                     </div>
@@ -90,66 +90,29 @@
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" ng-model="new_event.inscription"> Inscription
+                                    <input type="checkbox" ng-model="event_modal.inscription"> Inscription
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" ng-show="new_event.inscription">
+                    <div class="form-group" ng-show="event_modal.inscription">
                         <label for="input-event-inscription" class="col-sm-2 control-label">Date Limite d'Inscription
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-event-inscription" type="date" ng-model="new_event.date_inscription" />
+                            <input id="input-event-inscription" type="date" ng-model="event_modal.date_inscription" />
                             <br />
                         </div>
                     </div>
-
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" ng-click="saveNewEvent()">Save changes</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-
-<!-- Modal to look at an existing event -->
-<div class="modal fade" id="existing-event-modal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                </button>
-                <h4 class="modal-title">Event</h4>
-            </div>
-            <div class="modal-body">
                 
-                    <div class="row"><h5>Descriptions</h5></div>
-                    <div class="row"><span class="col-sm-2">Title</span><span class="col-sm-10">{{show_event.title}}</span></div>
-                    
-                    <div class="row"><span class="col-sm-2">Url</span><a class="col-sm-10">{{show_event.url}}</a></div>
-                    
-                    <div class="row"><span class="col-sm-2">du</span><span class="col-sm-10">{{show_event.start | date}}</span></div>
-                    
-                    <div class="row"><span class="col-sm-2">au</span><span class="col-sm-10">{{show_event.end | date}}</span></div>
-                    
-                
-                
-                    <div class="row"><h5>Inscriptions <a id="csv_download" href="">(CSV)</a></h5></div>
-                    <ul>
-                        <li ng-repeat="inscription in show_event.inscriptions">
-                            {{inscription.nom}} {{inscription.prenom}}, {{inscription.licence}}
-                        </li>
-                    </ul>
-                
+                <div class="col-sm-3">Inscriptions Actuelles<a id="csv_download" href="">(CSV)</a></div>
+                <div class="col-sm-9 col-sm-offset-3" ng-repeat="inscription in event_modal.inscriptions">
+                        {{inscription.nom}} {{inscription.prenom}}
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary" ng-click="saveModalEvent()">Sauver</button>
             </div>
         </div>
         <!-- /.modal-content -->

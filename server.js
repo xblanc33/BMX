@@ -25,9 +25,9 @@ mong_client.connect(db_url, function(err, db) {
     if (err) res.send(err);
 
     else {
-		//return all events
-		ws.get('/events', function(req, res) {
-       		db.collection("events", function(err, events_col) {
+        //return all events
+        ws.get('/events', function(req, res) {
+            db.collection("events", function(err, events_col) {
                 if (err) res.send(err);
                 else if (('from' in req.query) && ('to' in req.query)) { //This route is for Calendar
                     var req_from = parseInt(req.query.from)
@@ -36,19 +36,19 @@ mong_client.connect(db_url, function(err, db) {
                     results.success = 1
                     results.result = []
                         //console.log("from: "+from+" to: "+to)
-                    events_col.find({
-                        'start': {
-                            $gte: req_from
-                        },
-                        'end': {
-                            $lte: req_to
-                        }
-                    }).toArray(function(err, events) {
-                        if (!err) {
-                            results.result = events
-                            res.send(JSON.stringify(results))
-                        } else res.send(err);
-                    })
+                        //start end
+                    events_col.find()
+                        .toArray(function(err, events) {
+                            if (!err) {
+                                for (var i = events.length - 1; i >= 0; i--) {
+                                    events[i].start = new Date(events[i].du).getTime()
+                                    events[i].end = new Date(events[i].au).getTime()
+                                    events[i].title= events[i].titre
+                                };
+                                results.result = events
+                                res.send(JSON.stringify(results))
+                            } else res.send(err);
+                        })
                 } else if ('inscription' in req.query) { //This route gets only event with open inscription
                     //console.log("inscription")
                     var today = new Date()
@@ -91,11 +91,34 @@ mong_client.connect(db_url, function(err, db) {
                 if (err) {
                     res.send(err);
                 }
-
-                //TODO Login Password
-                events_col.insert(req.body, function(err, evt) {
-                    if (!err) res.send(evt)
-                    else res.send(err);
+                var mongoID = new ObjectID(req.body._id);
+                events_col.findOne({
+                    "_id": mongoID
+                }, function(err, fevt) {
+                    if (err) res.send(err);
+                    if (fevt) {
+                        console.log("found one")
+                        console.log(req.body)
+                        events_col.findOneAndReplace({
+                            "_id": mongoID
+                        }, {
+                            "titre": req.body.titre,
+                            "du": req.body.du,
+                            "au": req.body.au,
+                            "inscription": req.body.inscription,
+                            "date_inscription": req.body.date_inscription,
+                            "url": req.body.url
+                        }, function(err, evt) {
+                            if (!err) res.send(evt)
+                            else res.send(err);
+                        })
+                    } else {
+                        console.log("new one")
+                        events_col.insert(req.body, function(err, evt) {
+                            if (!err) res.send(req.body)
+                            else res.send(err);
+                        })
+                    }
                 })
             })
         }).delete('/events', function(req, res) {

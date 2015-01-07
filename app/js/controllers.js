@@ -103,12 +103,11 @@ ctrls.controller('competController', ['$scope', '$window', 'EventsService', 'Ins
 
     $scope.saveNewInscription = function() {
         if (!$scope.form_inscription.$valid) {
-            $scope.form_inscription.$saved=false
+            $scope.form_inscription.$saved = false
             console.log("form not valide")
-        }
-        else {
+        } else {
             $InscriptionsService.save($scope.new_inscription, function(response) {
-                $scope.form_inscription.$saved=true
+                $scope.form_inscription.$saved = true
                 console.log("save inscription" + JSON.stringify(response))
                 if (response.result === 1) $scope.new_inscription.success = true
                 else if (response.result === 2) $scope.new_inscription.already = true
@@ -118,9 +117,11 @@ ctrls.controller('competController', ['$scope', '$window', 'EventsService', 'Ins
     }
 
     $scope.showInscrits = function(event) {
-        $scope.show_inscrits=[]
-        $InscriptionsService.query({event_id:event._id}, function (inscriptions){
-            $scope.show_inscrits=inscriptions
+        $scope.show_inscrits = []
+        $InscriptionsService.query({
+            event_id: event._id
+        }, function(inscriptions) {
+            $scope.show_inscrits = inscriptions
         })
         $('#liste-inscrits').modal('show')
     }
@@ -137,52 +138,55 @@ ctrls.controller('homeController', ['$scope', function($scope) {
 
 
 ctrls.controller('adminController', ['$scope', 'EventsService', 'InscriptionsService', function($scope, $EventsService, $InscriptionsService) {
-    //bootstrap pop
-    $(function() {
-        $scope.events = []
-        $scope.new_event = {}
-    
-        $EventsService.query(function(events){$scope.events=events});
-        $('[data-toggle="popover"]').popover()
-    })
+    $scope.events = []
+    $scope.event_modal = {}
 
-    $scope.showModal = function() {
-        $('#new-event-modal').modal('show')
+    $EventsService.query(function(query_events) {
+        console.log("events:" + query_events.length)
+        $scope.events = query_events
+    });
+
+
+    $scope.showEvent = function(event) {
+        $scope.event_modal = event;
+
+        if ($scope.event_modal !== {}) {
+
+            $InscriptionsService.query({
+                'event_id': $scope.event_modal._id
+            }, function(query_inscriptions) {
+                $scope.event_modal.inscriptions = query_inscriptions
+                setCSVLink($scope.event_modal.inscriptions)
+
+            })
+        }
+        $('#event-modal').modal('show')
     }
 
     $scope.hideModal = function() {
-        $('#new-event-modal').modal('hide')
+        $('#event-modal').modal('hide')
     }
 
-    $scope.saveNewEvent = function() {
-        $scope.new_event["start"] = $scope.new_event["start"].getTime()
-        $scope.new_event["end"] = $scope.new_event["end"].getTime()
-        $scope.new_event.class = "event-important"
-            //$scope.new_event.id= $scope.events.length
-        var copy_event= angular.copy($scope.new_event)
-        $EventsService.save(copy_event , function(saved) {$scope.events.push(saved[0])})
-        
-        $scope.new_event = {}
-        $scope.hideModal()
+    $scope.saveModalEvent = function() {
+        //$scope.new_event["start"] = $scope.new_event["start"].getTime()
+        //$scope.new_event["end"] = $scope.new_event["end"].getTime()
+        //$scope.new_event.class = "event-important"
+        var copy_event = angular.copy($scope.event_modal)
+        copy_event.class = "event-important"
+        $EventsService.save(copy_event) // , function(saved) {$scope.events.push(saved[0])})
+
+        //$scope.new_event = {}
+        //$scope.hideModal()
     }
 
-    $scope.remove = function(event) {
+    $scope.removeEvent = function(event) {
         $EventsService.remove(event)
-        $scope.events = $EventsService.query()
-    }
-
-    $scope.show = function(event) {
-        $scope.show_event = event;
-
-        $InscriptionsService.query({
-            'event_id': event._id
-        }, function(inscriptions) {
-            $scope.show_event.inscriptions =inscriptions
-            setCSVLink(inscriptions)
-            $('#existing-event-modal').modal('show')
+        $EventsService.query(function(query_events) {
+            $scope.events = query_events
         })
-
     }
+
+
 
     function inscription2CSV(inscriptions) {
         var result = "nom,prenom,licence\n"
