@@ -148,7 +148,8 @@ ctrls.controller('adminController', ['$scope', 'EventsService', 'InscriptionsSer
 
 
     $scope.showEvent = function(event) {
-        $scope.event_modal = event;
+        $scope.event_modal = {}
+        $scope.event_modal = angular.copy(event);
 
         if ($scope.event_modal !== {}) {
 
@@ -191,7 +192,7 @@ ctrls.controller('adminController', ['$scope', 'EventsService', 'InscriptionsSer
     function inscription2CSV(inscriptions) {
         var result = "nom,prenom,licence\n"
         for (var i = inscriptions.length - 1; i >= 0; i--) {
-            result += inscriptions[i].nom + "," + inscriptions[i].prenom + "," + inscriptions[i].licence + "\n"
+            result += inscriptions[i].nom + "," + inscriptions[i].prenom + "," + inscriptions[i].email + "," + inscriptions[i].naissance + "\n"
         };
         console.log(result)
         return result
