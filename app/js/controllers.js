@@ -147,20 +147,24 @@ ctrls.controller('adminController', ['$scope', 'EventsService', 'InscriptionsSer
     });
 
 
-    $scope.showEvent = function(event) {
+    $scope.showNewEvent = function() {
         $scope.event_modal = {}
+        $('#event-modal').modal('show')
+
+    }
+
+    $scope.showEvent = function(event) {
         $scope.event_modal = angular.copy(event);
 
-        if ($scope.event_modal !== {}) {
 
-            $InscriptionsService.query({
-                'event_id': $scope.event_modal._id
-            }, function(query_inscriptions) {
-                $scope.event_modal.inscriptions = query_inscriptions
-                setCSVLink($scope.event_modal.inscriptions)
+        $InscriptionsService.query({
+            'event_id': $scope.event_modal._id
+        }, function(query_inscriptions) {
+            $scope.event_modal.inscriptions = query_inscriptions
+            setCSVLink($scope.event_modal.inscriptions)
 
-            })
-        }
+        })
+
         $('#event-modal').modal('show')
     }
 
