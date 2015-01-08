@@ -84,14 +84,17 @@
             <div class="panel-heading">Inscriptions Ouvertes</div>
             <div class="panel-body">
 
-                <div ng-repeat="inscription in inscriptions_ouvertes">
+                <div class="col-sm-12" ng-repeat="inscription in inscriptions_ouvertes">
                     <div class="col-sm-3">{{inscription.titre}}</div>
                     <div class="col-sm-9">
                         <button type="button" class="btn btn-default" ng-click="showInscrits(inscription)">Liste Inscrits</button>
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-default" ng-click="showModal()">S'inscrire à une compétition</button>
+                <div class="col-sm-12">
+
+                    <button type="button" class="btn btn-default" ng-click="showModal()">S'inscrire à une compétition</button>
+                </div>
             </div>
         </div>
 
