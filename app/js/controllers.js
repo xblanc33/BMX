@@ -32,7 +32,6 @@ ctrls.controller('animationController', ['$scope', '$window', function($scope, $
     })
 
     $scope.scrollInto = function(elementId) {
-        console.log("scollInto:" + elementId)
         if (!elementId) $window.scrollTo(0, 0);
         //check if an element can be found with id attribute
 
@@ -73,13 +72,11 @@ ctrls.controller('competController', ['$scope', '$window', 'EventsService', 'Ins
 
     //Scrolling
     $scope.scrollInto = function(elementId) {
-        console.log("scollInto:" + elementId)
         if (!elementId) $window.scrollTo(0, 0);
         //check if an element can be found with id attribute
 
         var el = document.getElementById(elementId);
         if (el) {
-            console.log(el.offsetTop);
             //$window.scrollTo(0,el.offsetTop-60);//scrollIntoView();
             //$(el).parent().addClass("active");
             //$(el).parent().removeClass("hover");
@@ -104,11 +101,9 @@ ctrls.controller('competController', ['$scope', '$window', 'EventsService', 'Ins
     $scope.saveNewInscription = function() {
         if (!$scope.form_inscription.$valid) {
             $scope.form_inscription.$saved = false
-            console.log("form not valide")
         } else {
             $InscriptionsService.save($scope.new_inscription, function(response) {
                 $scope.form_inscription.$saved = true
-                console.log("save inscription" + JSON.stringify(response))
                 if (response.result === 1) $scope.new_inscription.success = true
                 else if (response.result === 2) $scope.new_inscription.already = true
             })
@@ -142,7 +137,6 @@ ctrls.controller('adminController', ['$scope', 'EventsService', 'InscriptionsSer
     $scope.event_modal = {}
 
     $EventsService.query(function(query_events) {
-        console.log("events:" + query_events.length)
         $scope.events = query_events
     });
 
@@ -178,7 +172,9 @@ ctrls.controller('adminController', ['$scope', 'EventsService', 'InscriptionsSer
         //$scope.new_event.class = "event-important"
         var copy_event = angular.copy($scope.event_modal)
         copy_event.class = "event-important"
-        $EventsService.save(copy_event) // , function(saved) {$scope.events.push(saved[0])})
+        $EventsService.save(copy_event , function(save) {
+            $scope.event_modal.success=true
+        }) // , function(saved) {$scope.events.push(saved[0])})
 
         //$scope.new_event = {}
         //$scope.hideModal()
@@ -198,7 +194,6 @@ ctrls.controller('adminController', ['$scope', 'EventsService', 'InscriptionsSer
         for (var i = inscriptions.length - 1; i >= 0; i--) {
             result += inscriptions[i].nom + "," + inscriptions[i].prenom + "," + inscriptions[i].email + "," + inscriptions[i].naissance + "\n"
         };
-        console.log(result)
         return result
     }
 

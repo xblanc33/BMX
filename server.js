@@ -137,7 +137,7 @@ mong_client.connect(db_url, function(err, db) {
                 //TODO Login Password
                 events_col.findAndRemove({
                     "_id": new ObjectID(req.query._id)
-                }, [
+                }, [ 
                     ['_id', 1]
                 ], function(err, evt) {
                     if (!err) {
@@ -176,13 +176,11 @@ mong_client.connect(db_url, function(err, db) {
                 var req_event_id = req.body.event_id
                 var req_nom = req.body.nom
                 var req_prenom = req.body.prenom
-                var req_licence = req.body.licence
 
                 inscriptions_col.find({
                     event_id: req_event_id,
                     nom: req_nom,
                     prenom: req_prenom,
-                    licence: req_licence
                 }).toArray(
                     function(err, existing) {
                         if (!err) {

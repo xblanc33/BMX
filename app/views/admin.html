@@ -53,7 +53,7 @@
                 <h4 class="modal-title">Evenement</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+                <form novalidate class="form-horizontal">
                     <div class="form-group">
                         <label for="input-event-title" class="col-sm-2 control-label">Titre
                         </label>
@@ -104,12 +104,22 @@
                         </div>
                     </div>
                 </form>
-                
-                <div class="col-sm-3">Inscriptions Actuelles<a id="csv_download" href="">(CSV)</a></div>
-                <div class="col-sm-9 col-sm-offset-3" ng-repeat="inscription in event_modal.inscriptions">
+
+                <div ng-show="event_modal.inscriptions.length">
+                    <div>Inscriptions Actuelles<a id="csv_download" href="">(CSV)</a>
+                    </div>
+                    <div ng-repeat="inscription in event_modal.inscriptions">
                         {{inscription.nom}} {{inscription.prenom}}
+                    </div>
+                </div>
+                <div ng-hide="event_modal.inscriptions.length">
+                Pas d'inscription actuellement.
+                </div>
+                <div ng-show="event_modal.success" class="alert alert-success" role="alert">
+                    <b>Bravo</b>, Ajout effectué, Celui-ci sera visible d'ici quelques instants!
                 </div>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                 <button type="button" class="btn btn-primary" ng-click="saveModalEvent()">Sauver</button>
