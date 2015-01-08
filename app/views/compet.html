@@ -130,24 +130,29 @@
             </div>
             <div class="modal-body">
                 <!--<div ng-hide="form_inscription.$saved" class="alert alert-warning" role="alert">-->
-                <div ng-show="form_inscription.form_event_id.$error.required" class="alert alert-warning" role="alert">
-                    Vous devez choisir une compétition
+                <div ng-show="form_inscription.form_event_id.$error.required || form_inscription.form_nom.$error.required || form_inscription.form_prenom.$error.required || form_inscription.form_email.$error.required || form_inscription.form_plaque.$error.required" class="alert alert-warning" role="alert">
+                    <div ng-show="form_inscription.form_event_id.$error.required">
+                        Vous devez choisir une compétition</div>
+                    <div ng-show="form_inscription.form_nom.$error.required">
+                        Vous devez saisir votre nom
+                    </div>
+                    <div ng-show="form_inscription.form_prenom.$error.required">
+                        Vous devez saisir votre prénom
+                    </div>
+                    <div ng-show="form_inscription.form_naissance.$error.required">
+                        Vous devez saisir votre date de naissance
+                    </div>
+                    <div ng-show="form_inscription.form_email.$error.required">
+                        Vous devez saisir votre email
+                    </div>
+                    <div ng-show="form_inscription.form_plaque.$error.required">
+                        Vous devez saisir votre numéro de plaque
+                    </div>
                 </div>
-                <div ng-show="form_inscription.form_nom.$error.required" class="alert alert-warning" role="alert">
-                    Vous devez saisir votre nom
-                </div>
-                <div ng-show="form_inscription.form_prenom.$error.required" class="alert alert-warning" role="alert">
-                    Vous devez saisir votre prénom
-                </div>
-                <div ng-show="form_inscription.form_naissance.$error.required" class="alert alert-warning" role="alert">
-                    Vous devez saisir votre date de naissance
-                </div>
-                <div ng-show="form_inscription.form_email.$error.required" class="alert alert-warning" role="alert">
-                    Vous devez saisir votre email
-                </div>
-                <div ng-show="form_inscription.form_plaque.$error.required" class="alert alert-warning" role="alert">
-                    Vous devez saisir votre numéro de plaque
-                </div>
+
+
+
+
                 <!--</div>-->
                 <form novalidate class="form-horizontal" name="form_inscription">
 
@@ -213,14 +218,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-inscription-categorie" class="col-sm-2 control-label">Catégorie
-                        </label>
-                        <div class="col-sm-10">
-                            <input required id="input-inscription-categorie" name="form_categorie" type="text" ng-model="new_inscription.categorie" />
-                            <br />
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label for="input-inscription-arbitre" class="col-sm-2 control-label">Souhaitez-vous être arbitre ?
                         </label>
                         <div class="col-sm-10 checkbox">
@@ -241,7 +238,7 @@
                     </div>
                 </form>
                 <div ng-show="new_inscription.success" class="alert alert-success" role="alert">
-                    <b>Bravo</b>, Inscription effectuée
+                    <b>Bravo</b>, Inscription effectuée, Celle-ci sera visible d'ici quelques instant
                 </div>
                 <div ng-show="new_inscription.already" class="alert alert-warning" role="alert">
                     <b>Attention</b>, Vous êtes déjà inscrits
