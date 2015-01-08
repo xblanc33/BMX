@@ -39,7 +39,7 @@
             <li>
                 <a href="#inscriptions" ng-click="$event.preventDefault() ; scrollInto('inscriptions')">Inscriptions</a>
             </li>
-            
+
         </ul>
     </nav>
 
@@ -83,17 +83,19 @@
         <div id="inscriptions" class="panel panel-default">
             <div class="panel-heading">Inscriptions Ouvertes</div>
             <div class="panel-body">
-                <ul>
-                    <div ng-repeat="inscription in inscriptions_ouvertes"> 
-                        <div class="col-sm-3">{{inscription.titre}}</div>
-                        <div class="col-sm-9"><button type="button" class="btn btn-default" ng-click="showInscrits(inscription)">Liste Inscrits</button></div>
+
+                <div ng-repeat="inscription in inscriptions_ouvertes">
+                    <div class="col-sm-3">{{inscription.titre}}</div>
+                    <div class="col-sm-9">
+                        <button type="button" class="btn btn-default" ng-click="showInscrits(inscription)">Liste Inscrits</button>
                     </div>
-                </ul>
+                </div>
+
                 <button type="button" class="btn btn-default" ng-click="showModal()">S'inscrire à une compétition</button>
             </div>
         </div>
 
-        
+
 
     </div>
 
@@ -125,27 +127,24 @@
             </div>
             <div class="modal-body">
                 <!--<div ng-hide="form_inscription.$saved" class="alert alert-warning" role="alert">-->
-                    <div ng-show="form_inscription.form_event_id.$error.required" class="alert alert-warning" role="alert">
-                        Vous devez choisir une compétition
-                    </div>
-                    <div ng-show="form_inscription.form_nom.$error.required" class="alert alert-warning" role="alert">
-                        Vous devez saisir votre nom
-                    </div>
-                    <div ng-show="form_inscription.form_prenom.$error.required" class="alert alert-warning" role="alert">
-                        Vous devez saisir votre prénom
-                    </div>
-                    <div ng-show="form_inscription.form_naissance.$error.required" class="alert alert-warning" role="alert">
-                        Vous devez saisir votre date de naissance
-                    </div>
-                    <div ng-show="form_inscription.form_email.$error.required" class="alert alert-warning" role="alert">
-                        Vous devez saisir votre email
-                    </div>
-                    <div ng-show="form_inscription.form_plaque.$error.required" class="alert alert-warning" role="alert">
-                        Vous devez saisir votre numéro de plaque
-                    </div>
-                    <div ng-show="form_inscription.form_categorie.$error.required" class="alert alert-warning" role="alert">
-                        Vous devez saisir votre catégorie
-                    </div>
+                <div ng-show="form_inscription.form_event_id.$error.required" class="alert alert-warning" role="alert">
+                    Vous devez choisir une compétition
+                </div>
+                <div ng-show="form_inscription.form_nom.$error.required" class="alert alert-warning" role="alert">
+                    Vous devez saisir votre nom
+                </div>
+                <div ng-show="form_inscription.form_prenom.$error.required" class="alert alert-warning" role="alert">
+                    Vous devez saisir votre prénom
+                </div>
+                <div ng-show="form_inscription.form_naissance.$error.required" class="alert alert-warning" role="alert">
+                    Vous devez saisir votre date de naissance
+                </div>
+                <div ng-show="form_inscription.form_email.$error.required" class="alert alert-warning" role="alert">
+                    Vous devez saisir votre email
+                </div>
+                <div ng-show="form_inscription.form_plaque.$error.required" class="alert alert-warning" role="alert">
+                    Vous devez saisir votre numéro de plaque
+                </div>
                 <!--</div>-->
                 <form novalidate class="form-horizontal" name="form_inscription">
 
@@ -193,14 +192,12 @@
                     <div class="form-group">
                         <label for="input-inscription-bike" class="col-sm-2 control-label">Votre inscription
                         </label>
-                        <div class="col-sm-10 checkbox" >
-                            <input id="input-inscription-bike" type="checkbox" ng-model="new_inscription.vingt" />
-                            Je m'inscris en 20 pouces
+                        <div class="col-sm-10 checkbox">
+                            <input id="input-inscription-bike" type="checkbox" ng-model="new_inscription.vingt" /> Je m'inscris en 20 pouces
                             <br />
                         </div>
-                        <div class="col-sm-10 col-sm-offset-2 checkbox" >
-                            <input id="input-inscription-bike" type="checkbox" value="cruiser" ng-model="new_inscription.cruiser" />
-                            Je m'inscris en cruiser
+                        <div class="col-sm-10 col-sm-offset-2 checkbox">
+                            <input id="input-inscription-bike" type="checkbox" value="cruiser" ng-model="new_inscription.cruiser" /> Je m'inscris en cruiser
                             <br />
                         </div>
                     </div>
@@ -223,21 +220,19 @@
                     <div class="form-group">
                         <label for="input-inscription-arbitre" class="col-sm-2 control-label">Souhaitez-vous être arbitre ?
                         </label>
-                        <div class="col-sm-10 checkbox" >
+                        <div class="col-sm-10 checkbox">
                             <input id="input-inscription-arbitre" type="checkbox" ng-model="new_inscription.arbitre" />
                         </div>
                     </div>
                     <div class="form-group" ng-show="new_inscription.arbitre">
                         <label for="input-inscription-arbitre-quand" class="col-sm-2 control-label">Quand?
                         </label>
-                        <div class="col-sm-10 checkbox" >
-                            <input id="input-inscription-arbitre-quand" type="checkbox" ng-model="new_inscription.arbitre_matin" />
-                            le matin
+                        <div class="col-sm-10 checkbox">
+                            <input id="input-inscription-arbitre-quand" type="checkbox" ng-model="new_inscription.arbitre_matin" /> le matin
                             <br />
                         </div>
-                        <div class="col-sm-10 col-sm-offset-2 checkbox" >
-                            <input id="input-inscription-arbitre-quand" type="checkbox" ng-model="new_inscription.arbitre_soir" />
-                            l'après-midi
+                        <div class="col-sm-10 col-sm-offset-2 checkbox">
+                            <input id="input-inscription-arbitre-quand" type="checkbox" ng-model="new_inscription.arbitre_soir" /> l'après-midi
                             <br />
                         </div>
                     </div>

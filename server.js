@@ -114,7 +114,14 @@ mong_client.connect(db_url, function(err, db) {
                         })
                     } else {
                         console.log("new one")
-                        events_col.insert(req.body, function(err, evt) {
+                        events_col.insert({
+                            "titre": req.body.titre,
+                            "du": req.body.du,
+                            "au": req.body.au,
+                            "inscription": req.body.inscription,
+                            "date_inscription": req.body.date_inscription,
+                            "url": req.body.url
+                        }, function(err, evt) {
                             if (!err) res.send(req.body)
                             else res.send(err);
                         })
