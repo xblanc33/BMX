@@ -90,6 +90,7 @@ ctrls.controller('competController', ['$scope', '$window', 'EventsService', 'Ins
     $scope.showModal = function() {
         $scope.new_inscription = {}
         $scope.new_inscription.success = false
+        $scope.new_inscription.naissance = 1995
         $scope.new_inscription.already = false
         $('#inscription-modal').modal('show')
     }

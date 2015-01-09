@@ -188,7 +188,7 @@
                         <label for="input-inscription-naissance" class="col-sm-2 control-label">Date de naissance
                         </label>
                         <div class="col-sm-10">
-                            <input required id="input-inscription-naissance" name="form_naissance" type="date" ng-model="new_inscription.naissance" />
+                            <input required id="input-inscription-naissance" name="form_naissance" type="number" ng-model="new_inscription.naissance" min="1920" max"2010" maxlength="4" size="4"/>
                             <br />
                         </div>
                     </div>
