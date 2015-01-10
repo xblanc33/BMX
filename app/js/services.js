@@ -4,7 +4,7 @@
 
 var services = angular.module('servicesBMX', ['ngResource']);
 
-services.factory('EventsService', ['$resource',
+services.factory('CompetitionsService', ['$resource',
     function($resource) {
 
         function transformResponseDate(data, headersGetter) {
@@ -13,20 +13,16 @@ services.factory('EventsService', ['$resource',
             //console.log("length:"+data.length)
             var angData = angular.fromJson(data)
             for (var i = angData.length - 1; i >= 0; i--) {
-                angData[i]["du"] = new Date(angData[i]["du"])
-                angData[i]["au"] = new Date(angData[i]["au"])
+                angData[i]["date"] = new Date(angData[i]["date"])
                 angData[i]["date_inscription"] = new Date(angData[i]["date_inscription"])
             };
             return angData;
         }
 
-        return $resource('./events/:id', {}, {
+        return $resource('./competitions/:id', {}, {
             query: {
                 method: 'GET',
                 transformResponse: transformResponseDate,
-                //interceptor: {
-                //    response: parseResponseDates
-                //},
                 isArray: true,
                 cache: false
             },

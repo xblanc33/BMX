@@ -86,9 +86,9 @@
             <div class="panel-body">
 
                 <div class="col-sm-12" ng-repeat="inscription in inscriptions_ouvertes">
-                    <div class="col-sm-3">{{inscription.titre}}</div>
-                    <div class="col-sm-3">{{inscription.du | date:'mediumDate'}}</div>
-                    <div class="col-sm-3">{{inscription.au | date:'mediumDate'}}</div>
+                    <div class="col-sm-4">{{inscription.titre}}</div>
+                    <div class="col-sm-2">{{inscription.lieux}}</div>
+                    <div class="col-sm-3">{{inscription.date | date:'d / M / y'}}</div>
                     <div class="col-sm-3">
                         <button type="button" class="btn btn-default" ng-click="showInscrits(inscription)">Liste Inscrits</button>
                     </div>
@@ -164,7 +164,7 @@
                         </label>
                         <div class="col-sm-10">
                             <select required id="input-inscription-competition" name="form_event_id" class="form-control" ng-model="new_inscription.event_id">
-                                <option ng-repeat="inscription in inscriptions_ouvertes" value="{{inscription._id}}">{{inscription.titre}}</option>
+                                <option ng-repeat="inscription in inscriptions_ouvertes" value="{{inscription._id}}">{{inscription.titre}} , ({{inscription.lieux}}) , {{inscription.date.getDate()}} / {{inscription.date.getMonth()+1}}</option>
                             </select>
                         </div>
                     </div>

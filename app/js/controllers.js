@@ -47,13 +47,13 @@ ctrls.controller('animationController', ['$scope', '$window', function($scope, $
     }
 }])
 
-ctrls.controller('competController', ['$scope', '$window', 'EventsService', 'InscriptionsService', function($scope, $window, $EventsService, $InscriptionsService) {
+ctrls.controller('competController', ['$scope', '$window', 'CompetitionsService', 'InscriptionsService', function($scope, $window, $CompetitionsService, $InscriptionsService) {
     $('body').scrollspy({
         target: '#affix-nav',
         offset: 70
     })
 
-    $scope.inscriptions_ouvertes = $EventsService.query({
+    $scope.inscriptions_ouvertes = $CompetitionsService.query({
         'inscription': true
     })
 
@@ -64,7 +64,7 @@ ctrls.controller('competController', ['$scope', '$window', 'EventsService', 'Ins
     $scope.calendar = $("#calendar").calendar({
         tmpl_path: "components/bootstrap-calendar/tmpls/",
         language: 'fr-FR',
-        events_source: './events'
+        events_source: './competitions'
             //events_source: './events-calendar'
     });
 
@@ -133,58 +133,50 @@ ctrls.controller('homeController', ['$scope', function($scope) {
 }])
 
 
-ctrls.controller('adminController', ['$scope', 'EventsService', 'InscriptionsService', function($scope, $EventsService, $InscriptionsService) {
-    $scope.events = []
-    $scope.event_modal = {}
+ctrls.controller('adminController', ['$scope', 'CompetitionsService', 'InscriptionsService', function($scope, $CompetitionsService, $InscriptionsService) {
+    $scope.competitions = []
+    $scope.competition_modal = {}
 
-    $EventsService.query(function(query_events) {
-        $scope.events = query_events
+    $CompetitionsService.query(function(query_competitions) {
+        $scope.competitions = query_competitions
     });
 
 
-    $scope.showNewEvent = function() {
-        $scope.event_modal = {}
-        $('#event-modal').modal('show')
+    $scope.showNewCompetition = function() {
+        $scope.competition_modal = {}
+        $('#competition-modal').modal('show')
 
     }
 
-    $scope.showEvent = function(event) {
-        $scope.event_modal = angular.copy(event);
+    $scope.showCompetition = function(competition) {
+        $scope.competition_modal = angular.copy(competition);
 
 
         $InscriptionsService.query({
-            'event_id': $scope.event_modal._id
+            'event_id': $scope.competition_modal._id
         }, function(query_inscriptions) {
-            $scope.event_modal.inscriptions = query_inscriptions
-            setCSVLink($scope.event_modal.inscriptions)
+            $scope.competition_modal.inscriptions = query_inscriptions
+            setCSVLink($scope.competition_modal.inscriptions)
 
         })
 
-        $('#event-modal').modal('show')
+        $('#competition-modal').modal('show')
     }
 
-    $scope.hideModal = function() {
-        $('#event-modal').modal('hide')
+    $scope.saveCompetition = function() {
+        var copy_competition = angular.copy($scope.competition_modal)
+        console.log("save called")
+        copy_competition.class = "event-important"
+        $CompetitionsService.save(copy_competition, function(save) {
+            $scope.competition_modal.success = true
+            console.log("save ok")
+        })
     }
 
-    $scope.saveModalEvent = function() {
-        //$scope.new_event["start"] = $scope.new_event["start"].getTime()
-        //$scope.new_event["end"] = $scope.new_event["end"].getTime()
-        //$scope.new_event.class = "event-important"
-        var copy_event = angular.copy($scope.event_modal)
-        copy_event.class = "event-important"
-        $EventsService.save(copy_event , function(save) {
-            $scope.event_modal.success=true
-        }) // , function(saved) {$scope.events.push(saved[0])})
-
-        //$scope.new_event = {}
-        //$scope.hideModal()
-    }
-
-    $scope.removeEvent = function(event) {
-        $EventsService.remove(event)
-        $EventsService.query(function(query_events) {
-            $scope.events = query_events
+    $scope.removeCompetition = function(competition) {
+        $CompetitionsService.remove(competition)
+        $CompetitionsService.query(function(query_competitions) {
+            $scope.competitions = query_competitions
         })
     }
 

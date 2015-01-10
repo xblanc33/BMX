@@ -25,9 +25,8 @@ mong_client.connect(db_url, function(err, db) {
     if (err) res.send(err);
 
     else {
-        //return all events
-        ws.get('/events', function(req, res) {
-            db.collection("events", function(err, events_col) {
+        ws.get('/competitions', function(req, res) {
+            db.collection("competitions", function(err, competitions_col) {
                 if (err) res.send(err);
                 else if (('from' in req.query) && ('to' in req.query)) { //This route is for Calendar
                     var req_from = parseInt(req.query.from)
@@ -37,48 +36,51 @@ mong_client.connect(db_url, function(err, db) {
                     results.result = []
                         //console.log("from: "+from+" to: "+to)
                         //start end
-                    events_col.find()
-                        .toArray(function(err, events) {
+                    competitions_col.find()
+                        .toArray(function(err, competitions) {
                             if (!err) {
-                                for (var i = events.length - 1; i >= 0; i--) {
-                                    events[i].start = new Date(events[i].du).getTime()
-                                    events[i].end = new Date(events[i].au).getTime()
-                                    events[i].title= events[i].titre
+                                for (var i = competitions.length - 1; i >= 0; i--) {
+                                	var compet_date = new Date(competitions[i].date)
+                                	var day = compet_date.getDate()
+                                	var month = compet_date.getMonth()+1
+                                    competitions[i].start = compet_date.getTime()
+                                    competitions[i].end = compet_date.getTime()
+                                    competitions[i].title= day + " / " +month+ " , " + competitions[i].titre  + " , " + competitions[i].lieux
                                 };
-                                results.result = events
+                                results.result = competitions
                                 res.send(JSON.stringify(results))
                             } else res.send(err);
                         })
                 } else if ('inscription' in req.query) { //This route gets only event with open inscription
                     //console.log("inscription")
                     var today = new Date()
-                    events_col.find({
+                    competitions_col.find({
                         'inscription': true
-                    }).toArray(function(err, events) {
+                    }).toArray(function(err, competitions) {
                         if (!err) {
                             var result = []
-                            for (var i = events.length - 1; i >= 0; i--) {
-                                var date = new Date(events[i].date_inscription)
+                            for (var i = competitions.length - 1; i >= 0; i--) {
+                                var date = new Date(competitions[i].date_inscription)
                                 if (today <= date) {
-                                    result.push(events[i])
+                                    result.push(competitions[i])
                                 }
                             };
                             res.send(JSON.stringify(result))
                         } else res.send(err);
                     })
                 } else {
-                    events_col.find().toArray(function(err, events) {
-                        if (!err) res.send(JSON.stringify(events))
+                    competitions_col.find().toArray(function(err, competitions) {
+                        if (!err) res.send(JSON.stringify(competitions))
                         else res.send(err);
                     })
                 }
             })
-        }).get('/events/:id', function(req, res) {
-            db.collection("events", function(err, events_col) {
+        }).get('/competitions/:id', function(req, res) {
+            db.collection("competitions", function(err, competitions_col) {
                 if (err) {
                     res.send(err);
                 } else {
-                    events_col.find({
+                    competitions_col.find({
                         id: req.params.id
                     }).toArray(function(err, evt) {
                         if (!err) res.send(JSON.stringify(evt))
@@ -86,25 +88,25 @@ mong_client.connect(db_url, function(err, db) {
                     })
                 }
             })
-        }).post('/events', function(req, res) {
-            db.collection("events", function(err, events_col) {
+        }).post('/competitions', function(req, res) {
+            db.collection("competitions", function(err, competitions_col) {
                 if (err) {
                     res.send(err);
                 }
                 var mongoID = new ObjectID(req.body._id);
-                events_col.findOne({
+                competitions_col.findOne({
                     "_id": mongoID
                 }, function(err, fevt) {
                     if (err) res.send(err);
                     if (fevt) {
                         console.log("found one")
                         console.log(req.body)
-                        events_col.findOneAndReplace({
+                        competitions_col.findOneAndReplace({
                             "_id": mongoID
                         }, {
                             "titre": req.body.titre,
-                            "du": req.body.du,
-                            "au": req.body.au,
+                            "date": req.body.date,
+                            "lieux": req.body.lieux,
                             "inscription": req.body.inscription,
                             "date_inscription": req.body.date_inscription,
                             "url": req.body.url
@@ -114,10 +116,10 @@ mong_client.connect(db_url, function(err, db) {
                         })
                     } else {
                         console.log("new one")
-                        events_col.insert({
+                        competitions_col.insert({
                             "titre": req.body.titre,
-                            "du": req.body.du,
-                            "au": req.body.au,
+                            "date": req.body.date,
+                            "lieux": req.body.lieux,
                             "inscription": req.body.inscription,
                             "date_inscription": req.body.date_inscription,
                             "url": req.body.url
@@ -128,14 +130,14 @@ mong_client.connect(db_url, function(err, db) {
                     }
                 })
             })
-        }).delete('/events', function(req, res) {
-            db.collection("events", function(err, events_col) {
+        }).delete('/competitions', function(req, res) {
+            db.collection("competitions", function(err, competitions_col) {
                 if (err) {
                     res.send(err);
                 }
 
                 //TODO Login Password
-                events_col.findAndRemove({
+                competitions_col.findAndRemove({
                     "_id": new ObjectID(req.query._id)
                 }, [ 
                     ['_id', 1]

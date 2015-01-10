@@ -33,56 +33,56 @@
         <div class="panel-heading">Evenements</div>
         <div class="panel-body">
             <ul>
-                <li ng-repeat="event in events">
-                    <button ng-click="showEvent(event)"> {{event.titre}}</button> <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true" ng-click="removeEvent(event)"></span>
+                <li ng-repeat="competition in competitions">
+                    <button ng-click="showCompetition(competition)"> {{competition.titre}}</button> <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true" ng-click="removeCompetition(competition)"></span>
                     <!--<button type="button" class="btn btn-danger" ng-click="remove(event)">Supprimer</button>-->
                 </li>
             </ul>
-            <button type="button" class="btn btn-default" ng-click="showNewEvent()"> Nouvel Evenement</button>
+            <button type="button" class="btn btn-default" ng-click="showNewCompetition()"> Nouvel Evenement</button>
         </div>
     </div>
 </div>
 
 <!-- Modal for creating a new event -->
-<div class="modal fade" id="event-modal">
+<div class="modal fade" id="competition-modal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title">Evenement</h4>
+                <h4 class="modal-title">Competition</h4>
             </div>
             <div class="modal-body">
                 <form novalidate class="form-horizontal">
                     <div class="form-group">
-                        <label for="input-event-title" class="col-sm-2 control-label">Titre
+                        <label for="input-competition-title" class="col-sm-2 control-label">Titre
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-event-title" type="text" ng-model="event_modal.titre" />
+                            <input id="input-competition-title" type="text" ng-model="competition_modal.titre" />
                             <br />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-event-start" class="col-sm-2 control-label">Du
+                        <label for="input-competition-date" class="col-sm-2 control-label">Date
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-event-start" type="date" ng-model="event_modal.du" />
+                            <input id="input-competition-date" type="date" ng-model="competition_modal.date" />
                             <br />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-event-end" class="col-sm-2 control-label">Au
+                        <label for="input-competition-lieux" class="col-sm-2 control-label">Lieux
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-event-end" type="date" ng-model="event_modal.au" />
+                            <input id="input-competition-lieux" type="text" ng-model="competition_modal.lieux" />
                             <br />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-event-url" class="col-sm-2 control-label">Site Web
+                        <label for="input-competition-url" class="col-sm-2 control-label">Site Web
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-event-url" type="url" ng-model="event_modal.url" />
+                            <input id="input-competition-url" type="url" ng-model="competition_modal.url" />
                             <br />
                         </div>
                     </div>
@@ -90,39 +90,39 @@
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" ng-model="event_modal.inscription"> Inscription
+                                    <input type="checkbox" ng-model="competition_modal.inscription"> Inscription
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" ng-show="event_modal.inscription">
-                        <label for="input-event-inscription" class="col-sm-2 control-label">Date Limite d'Inscription
+                    <div class="form-group" ng-show="competition_modal.inscription">
+                        <label for="input-competition-inscription" class="col-sm-2 control-label">Date Limite d'Inscription
                         </label>
                         <div class="col-sm-10">
-                            <input id="input-event-inscription" type="date" ng-model="event_modal.date_inscription" />
+                            <input id="input-competition-inscription" type="date" ng-model="competition_modal.date_inscription" />
                             <br />
                         </div>
                     </div>
                 </form>
 
-                <div ng-show="event_modal.inscriptions.length">
+                <div ng-show="competition_modal.inscriptions.length">
                     <div>Inscriptions Actuelles<a id="csv_download" href="">(CSV)</a>
                     </div>
-                    <div ng-repeat="inscription in event_modal.inscriptions">
+                    <div ng-repeat="inscription in competition_modal.inscriptions">
                         {{inscription.nom}} {{inscription.prenom}}
                     </div>
                 </div>
-                <div ng-hide="event_modal.inscriptions.length">
+                <div ng-hide="competition_modal.inscriptions.length">
                 Pas d'inscription actuellement.
                 </div>
-                <div ng-show="event_modal.success" class="alert alert-success" role="alert">
+                <div ng-show="competition_modal.success" class="alert alert-success" role="alert">
                     <b>Bravo</b>, Ajout effectué, Celui-ci sera visible d'ici quelques instants!
                 </div>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary" ng-click="saveModalEvent()">Sauver</button>
+                <button type="button" class="btn btn-primary" ng-click="saveCompetition()">Sauver</button>
             </div>
         </div>
         <!-- /.modal-content -->
