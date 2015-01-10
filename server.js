@@ -109,7 +109,8 @@ mong_client.connect(db_url, function(err, db) {
                             "lieux": req.body.lieux,
                             "inscription": req.body.inscription,
                             "date_inscription": req.body.date_inscription,
-                            "url": req.body.url
+                            "url": req.body.url,
+                            "class": req.body.class
                         }, function(err, evt) {
                             if (!err) res.send(evt)
                             else res.send(err);
@@ -122,7 +123,8 @@ mong_client.connect(db_url, function(err, db) {
                             "lieux": req.body.lieux,
                             "inscription": req.body.inscription,
                             "date_inscription": req.body.date_inscription,
-                            "url": req.body.url
+                            "url": req.body.url,
+                            "class": req.body.class
                         }, function(err, evt) {
                             if (!err) res.send(req.body)
                             else res.send(err);
