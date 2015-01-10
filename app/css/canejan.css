@@ -3,13 +3,17 @@ body {
     
     background-color: #141615;
 }
+a {
+    color: #CA2721;
+}
 #banner-bmx {
     text-align: center;
     font-size: 60px;
+    color:white;
 }
-#navbar {
+/*#navbar {
     font-size: 30px;
-}
+}*/
 .button, .button:hover {
     color: #CA2721;
     text-decoration: none;
@@ -30,9 +34,9 @@ body {
     color: white;
     text-decoration: none;
 }
-.panel-heading {
+/*.panel-heading {
     font-size: 30px;
-}
+}*/
 #welcome-separator {
     height: 5px;
     background-color: #CA2721;

@@ -5,7 +5,11 @@
     /*left: 8%;*/
 }
 li.active {
-    background-color: red;
+    background-color: #CA2721;
+
+}
+li.active a {
+    color: white !important;
 }
 .main-content {
     padding-top: 60px;
@@ -24,8 +28,9 @@ li.active {
 .admin-main {
     padding-top: 60px;
 }
-/* Portrait tablet to landscape and desktop */
 
+
+/* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 1199px) {
     .twitter {
         position: static;
@@ -33,29 +38,27 @@ li.active {
         margin-left: 115px;
     }
 }
-/* Landscape phone to portrait tablet */
 
+/* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
     .sidebar {
         visibility: hidden;
     }
     .twitter {
-        position: static;
-        top: initial;
+        visibility:hidden;
     }
     .main-content {
         margin-left: 0px;
     }
 }
-/* Landscape phones and down */
 
+/* Landscape phones and down */
 @media (max-width: 480px) {
     .sidebar {
         visibility: hidden;
     }
     .twitter {
-        position: static;
-        top: initial;
+        visibility: hidden;
     }
     .main-content {
         margin-left: 0px;
