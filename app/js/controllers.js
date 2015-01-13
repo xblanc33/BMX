@@ -86,12 +86,42 @@ ctrls.controller('competController', ['$scope', '$window', 'CompetitionsService'
         }
     }
 
+
+
+
     //modal inscription
     $scope.showModal = function() {
         $scope.new_inscription = {}
         $scope.new_inscription.success = false
         $scope.new_inscription.naissance = 1995
+
+        $scope.new_inscription.categorie = function(nCat) {
+            var _naissance = parseInt($scope.new_inscription.naissance)
+            var _categorie = "inconnue"
+            if (isNaN(_naissance)) return "Naissance mal saisie"
+            else {
+                if (_naissance <= 1985) _categorie =  "30+"
+                else if (_naissance <= 1990) _categorie =  "25/29"
+                else if (_naissance <= 1996) _categorie =  "19/24"
+                else if (_naissance === 1997) _categorie =  "juniors 2"
+                else if (_naissance === 1998) _categorie =  "juniors 1"
+                else if (_naissance === 1999) _categorie =  "cadets 2"
+                else if (_naissance === 2000) _categorie =  "cadets 1"
+                else if (_naissance === 2001) _categorie =  "minimes 2"
+                else if (_naissance === 2002) _categorie =  "minimes 1"
+                else if (_naissance === 2003) _categorie =  "benjamin 2"
+                else if (_naissance === 2004) _categorie =  "benjamin 1"
+                else if (_naissance === 2005) _categorie =  "pupilles 2"
+                else if (_naissance === 2006) _categorie =  "pupilles 1"
+                else if (_naissance >= 2007) _categorie =  "8 ans et moins"
+                else _categorie =  "Naissance mal saisie"
+            }
+        $scope.new_inscription._categorie = _categorie
+            return _categorie
+        }
+
         $scope.new_inscription.already = false
+
         $('#inscription-modal').modal('show')
     }
 
@@ -103,6 +133,7 @@ ctrls.controller('competController', ['$scope', '$window', 'CompetitionsService'
         if (!$scope.form_inscription.$valid) {
             $scope.form_inscription.$saved = false
         } else {
+            //var copy_inscription = angular.copy($scope.new_inscription)
             $InscriptionsService.save($scope.new_inscription, function(response) {
                 $scope.form_inscription.$saved = true
                 if (response.result === 1) $scope.new_inscription.success = true
