@@ -1,6 +1,6 @@
 'use strict';
 
-var app=angular.module('appBMX',['ngRoute' , 'ngAnimate' , 'servicesBMX' , 'controllersBMX'])//, 'waypoint-module'])
+var app=angular.module('appBMX',['ngRoute' , 'ngAnimate' , 'servicesBMX' , 'controllersBMX' ])//, 'waypoint-module'])
 
 
 app.config(['$routeProvider', function($rp){

@@ -1,6 +1,6 @@
 'use strict';
 
-var ctrls = angular.module('controllersBMX', ['servicesBMX']) //, 'waypoint-module'])
+var ctrls = angular.module('controllersBMX', ['servicesBMX' ]) //, 'waypoint-module'])
 
 
 ctrls.controller('clubController', ['$scope', '$window', function($scope, $window) {
@@ -23,6 +23,8 @@ ctrls.controller('clubController', ['$scope', '$window', function($scope, $windo
             }); //scrollIntoView();
         }
     }
+
+    $window.twttr.widgets.load()
 }])
 
 ctrls.controller('animationController', ['$scope', '$window', function($scope, $window) {
@@ -45,6 +47,7 @@ ctrls.controller('animationController', ['$scope', '$window', function($scope, $
             }); //scrollIntoView();
         }
     }
+    $window.twttr.widgets.load()
 }])
 
 ctrls.controller('competController', ['$scope', '$window', 'CompetitionsService', 'InscriptionsService', function($scope, $window, $CompetitionsService, $InscriptionsService) {
@@ -86,7 +89,8 @@ ctrls.controller('competController', ['$scope', '$window', 'CompetitionsService'
         }
     }
 
-
+    //twitter
+    $window.twttr.widgets.load()
 
 
     //modal inscription
