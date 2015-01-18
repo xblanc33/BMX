@@ -205,6 +205,87 @@ mong_client.connect(db_url, function(err, db) {
                         }
                     })
             })
+        }).get('/pilotes', function(req, res) {
+            db.collection("pilotes", function(err, pilotes_col) {
+                if (err) res.send(err);
+                else {
+                    pilotes_col.find().toArray(function(err, pilotes) {
+                        if (!err) res.send(JSON.stringify(pilotes))
+                        else res.send(err);
+                    })
+                }
+            })
+        }).get('/pilotes/:id', function(req, res) {
+            db.collection("pilotes", function(err, pilotes_col) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    pilotes_col.find({
+                        id: req.params.id
+                    }).toArray(function(err, pil) {
+                        if (!err) res.send(JSON.stringify(pil))
+                        else res.send(err);
+                    })
+                }
+            })
+        }).post('/pilotes', function(req, res) {
+            db.collection("pilotes", function(err, pilotes_col) {
+                if (err) {
+                    res.send(err);
+                }
+                var mongoID = new ObjectID(req.body._id);
+                pilotes_col.findOne({
+                    "_id": mongoID
+                }, function(err, fpil) {
+                    if (err) res.send(err);
+                    if (fpil) {
+                        pilotes_col.findOneAndReplace({
+                            "_id": mongoID
+                        }, {
+                            "titre": req.body.titre,
+                            "date": req.body.date,
+                            "lieux": req.body.lieux,
+                            "inscription": req.body.inscription,
+                            "date_inscription": req.body.date_inscription,
+                            "url": req.body.url,
+                            "class": req.body.class
+                        }, function(err, pil) {
+                            if (!err) res.send(evt)
+                            else res.send(err);
+                        })
+                    } else {
+                        pilotes_col.insert({
+                            "titre": req.body.titre,
+                            "date": req.body.date,
+                            "lieux": req.body.lieux,
+                            "inscription": req.body.inscription,
+                            "date_inscription": req.body.date_inscription,
+                            "url": req.body.url,
+                            "class": req.body.class
+                        }, function(err, pil) {
+                            if (!err) res.send(req.body)
+                            else res.send(err);
+                        })
+                    }
+                })
+            })
+        }).delete('/pilotes', function(req, res) {
+            db.collection("pilotes", function(err, pilotes_col) {
+                if (err) {
+                    res.send(err);
+                }
+
+                //TODO Login Password
+                pilotes_col.findAndRemove({
+                    "_id": new ObjectID(req.query._id)
+                }, [ 
+                    ['_id', 1]
+                ], function(err, pil) {
+                    if (!err) {
+                        res.send({})
+                    } else res.send(err);
+                })
+            })
         })
     }
 })

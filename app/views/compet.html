@@ -131,7 +131,7 @@
                         Vous devez saisir votre prénom
                     </div>
                     <div ng-show="form_inscription.form_naissance.$error.required">
-                        Vous devez saisir votre date de naissance
+                        Vous devez saisir votre année de naissance
                     </div>
                     <div ng-show="form_inscription.form_email.$error.required">
                         Vous devez saisir votre email
@@ -173,7 +173,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-inscription-naissance" class="col-sm-2 control-label">Date de naissance
+                        <label for="input-inscription-naissance" class="col-sm-2 control-label">Année de naissance
                         </label>
                         <div class="col-sm-10">
                             <input required id="input-inscription-naissance" name="form_naissance" type="number" ng-model="new_inscription.naissance" min="1920" max"2010" maxlength="4" size="4"/>
